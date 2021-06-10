@@ -1,0 +1,16 @@
+footer{
+    background-color: #1087EB;
+    padding:80px 0;
+}
+
+.footerDown{
+    background-color: #0076D1;
+    padding-bottom: 25px;
+    padding-top: 25px;
+   
+}
+
+.footerDown p{
+    opacity: 0.5;
+   color: white;
+}
