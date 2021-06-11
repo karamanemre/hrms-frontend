@@ -22,10 +22,17 @@ export default function Head() {
     <header>
       <div className="dropDownHeader">
         <div  className="dropDownMenuDiv">
-        <Dropdown pointing="top left" className='link item ' text="Adaylar İçin" >
+        <Dropdown pointing className='link item ' text="Adaylar İçin" >
           <Dropdown.Menu className="dropDownMenu">
             <Dropdown.Item icon="caret right" ><Link  to="/jobpostings">İş Başvurusu Yap</Link></Dropdown.Item>
             <Dropdown.Item icon="caret right" text="Şirketler"><Link  to="/employers">Şirketler</Link></Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Dropdown pointing className='link item ' style={{paddingLeft:"3em"}} text="İşveren İçin">
+          <Dropdown.Menu className="dropDownMenu" >
+            <Dropdown.Item  icon="caret right" ><Link  to="/jobpostings">İlan Yayınla</Link></Dropdown.Item>
+            <Dropdown.Item icon="caret right" text="Şirketler"><Link  to="/employers">Açık Cv Havuzunu Gör</Link></Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
         </div>

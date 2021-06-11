@@ -26,7 +26,7 @@ export default function Employers() {
                   header={product.companyName}
                   href="#card-example-link-card"
                   meta={product.webSite}
-                  description="Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat."
+                  description="Şirket Hakkında Daha Detaylı Bilgi İçin Tıklayınız"
                 />
               </Card.Group>
             ))}
