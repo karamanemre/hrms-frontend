@@ -1,5 +1,13 @@
 .naviBar{
     padding-bottom: 1em;
+    position:fixed;
+    z-index: 500;
+    width: 100%;
+    opacity: 0.8;
     
+}
+
+.naviBarDiv{
+    padding-bottom: 7.5em;
 }
 

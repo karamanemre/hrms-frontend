@@ -27,6 +27,8 @@ import Employers from "../pages/Employers";
 import EmployerRegister from "./Auth/EmployerRegister";
 import Register from "./Auth/Register";
 import CandidateRegister from "./Auth/CandidateRegister";
+import JobPostingsAdd from "../pages/JobPostingsAdd";
+
 
 
 export default function Dashboard() {
@@ -40,8 +42,8 @@ export default function Dashboard() {
       <Route exact path="/employerregister" component={EmployerRegister} />
       <Route exact path="/candidateregister" component={CandidateRegister} />
       <Route exact path="/register" component={Register} />
-      {/* <EmployerJobPostingsPages></EmployerJobPostingsPages>
-      */}
+      
+     <Route exact path="/jobPostingsAdd" component={JobPostingsAdd} />
     </div>
   );
 }

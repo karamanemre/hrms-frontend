@@ -51,12 +51,9 @@ export default function JobPostings() {
             width={5}
             style={{ paddingLeft: "8em", marginTop: "5em" }}
           >
-            
             <Card>
               <Card.Content>
-                <Card.Header style={{ textAlign: "left" }}>
-                  Şehir
-                </Card.Header>
+                <Card.Header style={{ textAlign: "left" }}>Şehir</Card.Header>
               </Card.Content>
               <Card.Content>
                 <div style={{ textAlign: "left" }}>
@@ -69,14 +66,14 @@ export default function JobPostings() {
                   </div>
                   <br />
                   {city.map((result) => (
-                    <div style={{paddingBottom:"1em"}}>
-                    <Checkbox label={result.city} />
-                  </div>
+                    <div style={{ paddingBottom: "1em" }}>
+                      <Checkbox label={result.city} />
+                    </div>
                   ))}
                 </div>
               </Card.Content>
             </Card>
-            <br/>
+            <br />
             <Card>
               <Card.Content>
                 <Card.Header style={{ textAlign: "left" }}>
@@ -94,16 +91,16 @@ export default function JobPostings() {
                   </div>
                   <br />
                   {jobpositions.map((result) => (
-                    <div style={{paddingBottom:"1em"}}>
-                    <Checkbox label={result.positionName} />
-                  </div>
+                    <div style={{ paddingBottom: "1em" }}>
+                      <Checkbox label={result.positionName} />
+                    </div>
                   ))}
                 </div>
               </Card.Content>
             </Card>
 
             <br />
-            
+
             <Card>
               <Card.Content>
                 <Card.Header style={{ textAlign: "left" }}>
@@ -151,19 +148,45 @@ export default function JobPostings() {
               </Card.Content>
             </Card>
           </Grid.Column>
-          <Grid.Column width={11} style={{ paddingRight: "2em" }}></Grid.Column>
+
+          <Grid.Column width={11} style={{ paddingRight: "2em" }}>
+            {jobPostings.map((result) => (
+              <Card fluid style={{ marginTop: "5em", paddingRight: "1em" }}>
+                <Card.Content>
+                  <Card.Header>{result.companyName}</Card.Header>
+                  <Card.Meta>{result.jobPosition}</Card.Meta>
+                  <Card.Description>
+                    <Grid>
+                      <Grid.Row>
+                        <Grid.Column width={7}>
+                          <label style={{ float: "left" }}>
+                            Açıklama: {result.description}
+                          </label>
+                        </Grid.Column>
+                        <Grid.Column width={2}></Grid.Column>
+                        <Grid.Column width={7}>
+                          <Card.Description style={{ float: "right" }}>
+                            Açık Pozisyon Sayısı: {result.applicaitonDeadline}
+                            <br />
+                            Son Başvuru Tarihi: {result.releaseDate}
+                          </Card.Description>
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
+                  </Card.Description>
+                </Card.Content>
+                <Card.Content extra>
+                  <div className="ui two buttons">
+                    <Button basic color="green">
+                      Başvur
+                    </Button>
+                  </div>
+                </Card.Content>
+              </Card>
+            ))}
+          </Grid.Column>
         </Grid.Row>
       </Grid>
     </div>
   );
-}
-
-{
-  /* <Feed>
-                  <Feed.Event>
-                    <Feed.Content>
-                     
-                    </Feed.Content>
-                  </Feed.Event>
-                </Feed> */
 }

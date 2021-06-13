@@ -48,7 +48,7 @@ export default function Head() {
             <Grid.Column width={8}>
               <Header textAlign="center">
                 <Header.Content className="search">
-                  {"Kariyeriniz için iş aramaya başlayın..."}
+                  <label  style={{fontSize:"1.5em"}}> Kariyeriniz için iş aramaya başlayın...</label>
                 </Header.Content>
                 <Segment inverted>
                   <Input inverted fluid size="huge" placeholder="Search..." />

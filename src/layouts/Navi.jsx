@@ -36,7 +36,7 @@ export default function Navi() {
 
   return (
     <div className="naviBarDiv">
-      <Menu className="naviBar">
+      <Menu className="naviBar" >
         <Container>
           <Menu.Item name="building outline">
            <Link to="/"><Image src="/logo.png" size="tiny"></Image></Link> 
