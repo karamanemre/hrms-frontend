@@ -28,6 +28,7 @@ import EmployerRegister from "./Auth/EmployerRegister";
 import Register from "./Auth/Register";
 import CandidateRegister from "./Auth/CandidateRegister";
 import JobPostingsAdd from "../pages/JobPostingsAdd";
+import JobPostingConfirmation from "../pages/JobPostingConfirmation";
 
 
 
@@ -42,8 +43,8 @@ export default function Dashboard() {
       <Route exact path="/employerregister" component={EmployerRegister} />
       <Route exact path="/candidateregister" component={CandidateRegister} />
       <Route exact path="/register" component={Register} />
-      
      <Route exact path="/jobPostingsAdd" component={JobPostingsAdd} />
+     <Route exact path="/jobPostingconfirmation" component={JobPostingConfirmation} />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { useState, useEffect } from "react";
+
 import {
   Button,
   Form,
@@ -16,15 +17,9 @@ import JobPositionService from "../services/jobPositionService";
 import CityService from "../services/cityService";
 import { useHistory } from "react-router";
 
-const options = [
-  { text: "Tam Zamanlı"},
-  { text: "Yarı Zamanlı"},
-];
+const options = [{ text: "Tam Zamanlı" }, { text: "Yarı Zamanlı" }];
 
-const options2 = [
-  { text: "İş yerinde"},
-  { text: "Uzaktan"},
-];
+const options2 = [{ text: "İş yerinde" }, { text: "Uzaktan" }];
 
 console.log(options.push());
 
@@ -72,12 +67,13 @@ export default function JobPostingsAdd() {
     validationSchema,
     onSubmit: (values) => {
       let jobPostingService = new JobPostingService();
-      jobPostingService.add(values);
+      jobPostingService.add(values).then(alert("Başarıyla eklendi"));
     },
   });
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div >
+      <div style={{backgroundColor:"#F9F9F9"}}>
       <Grid>
         <Grid.Row>
           <Grid.Column width={4}></Grid.Column>
@@ -94,7 +90,7 @@ export default function JobPostingsAdd() {
             <form onSubmit={handleSubmit}>
               <Form>
                 <Form.Field>
-                  <label style={{float:"left"}}>Max Ücret</label>
+                  <label style={{ float: "left" }}>Max Ücret</label>
                   <input
                     type="text"
                     name="maxSalary"
@@ -106,7 +102,7 @@ export default function JobPostingsAdd() {
                 </Form.Field>
 
                 <Form.Field>
-                <label style={{float:"left"}}>Min Ücret</label>
+                  <label style={{ float: "left" }}>Min Ücret</label>
                   <input
                     type="text"
                     name="minSalary"
@@ -118,7 +114,7 @@ export default function JobPostingsAdd() {
                 </Form.Field>
 
                 <Form.Field>
-                <label style={{float:"left"}}>Açıklama</label>
+                  <label style={{ float: "left" }}>Açıklama</label>
                   <input
                     type="text"
                     name="description"
@@ -130,9 +126,10 @@ export default function JobPostingsAdd() {
                 </Form.Field>
 
                 <Form.Field>
-                <label style={{float:"left"}}>Son Başvuru Tarihi</label>
+                  <label style={{ float: "left" }}>Son Başvuru Tarihi</label>
                   <input
-                    type="text"
+                    type="date"
+                    format="YYYY/DD/MM"
                     name="applicaitonDeadline"
                     placeholder="Son Başvuru Tarihi"
                     onChange={handleChange}
@@ -141,10 +138,11 @@ export default function JobPostingsAdd() {
                   {errors.applicaitonDeadline
                     ? errors.applicaitonDeadline
                     : null}
+                    
                 </Form.Field>
 
                 <Form.Field>
-                <label style={{float:"left"}}>Açık Pozisyon Sayısı</label>
+                  <label style={{ float: "left" }}>Açık Pozisyon Sayısı</label>
                   <input
                     type="text"
                     name="numberOfOpenPosition"
@@ -158,9 +156,8 @@ export default function JobPostingsAdd() {
                 </Form.Field>
 
                 <Form.Field>
-                <label style={{float:"left"}}>Pozisyon</label>
+                  <label style={{ float: "left" }}>Pozisyon</label>
                   <div className="form-group mt-2">
-                    
                     <select
                       className="form-control"
                       id="jobPositionId"
@@ -176,15 +173,14 @@ export default function JobPostingsAdd() {
                       ))}
                     </select>
                     <small id="emailHelp" className="form-text text-danger">
-                      {errors.jobPositionId && errors.jobPositionId}
+                      {errors.jobPositionId ? errors.jobPositionId : null}
                     </small>
                   </div>
                 </Form.Field>
 
                 <Form.Field>
-                <label style={{float:"left"}}>Şehir</label>
+                  <label style={{ float: "left" }}>Şehir</label>
                   <div className="form-group mt-2">
-                   
                     <select
                       className="form-control"
                       id="cityId"
@@ -200,15 +196,14 @@ export default function JobPostingsAdd() {
                       ))}
                     </select>
                     <small id="emailHelp" className="form-text text-danger">
-                      {errors.city && errors.city}
+                      {errors.city ? errors.city : null}
                     </small>
                   </div>
                 </Form.Field>
 
                 <Form.Field>
-                <label style={{float:"left"}}>Çalışma Zamanı</label>
+                  <label style={{ float: "left" }}>Çalışma Zamanı</label>
                   <div className="form-group mt-2">
-                    
                     <select
                       className="form-control"
                       id="workplace"
@@ -230,9 +225,8 @@ export default function JobPostingsAdd() {
                 </Form.Field>
 
                 <Form.Field>
-                <label style={{float:"left"}}>Çalışma Yeri</label>
+                  <label style={{ float: "left" }}>Çalışma Yeri</label>
                   <div className="form-group mt-2">
-                    
                     <select
                       className="form-control"
                       id="typeOfWork"
@@ -253,12 +247,12 @@ export default function JobPostingsAdd() {
                   </div>
                 </Form.Field>
               </Form>
-
+             
               <Button
                 primary
                 onClick={console.log(values)}
                 type="submit"
-                style={{ marginBottom: "6em" ,marginTop:"2em"}}
+                style={{ marginBottom: "6em", marginTop: "2em" }}
               >
                 Yayınla
               </Button>
@@ -267,6 +261,7 @@ export default function JobPostingsAdd() {
           <Grid.Column width={4}></Grid.Column>
         </Grid.Row>
       </Grid>
+      </div>
     </div>
   );
 }

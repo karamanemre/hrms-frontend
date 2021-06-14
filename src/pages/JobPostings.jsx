@@ -166,9 +166,9 @@ export default function JobPostings() {
                         <Grid.Column width={2}></Grid.Column>
                         <Grid.Column width={7}>
                           <Card.Description style={{ float: "right" }}>
-                            Açık Pozisyon Sayısı: {result.applicaitonDeadline}
+                            Açık Pozisyon Sayısı: {result.numberOfOpenPosition}
                             <br />
-                            Son Başvuru Tarihi: {result.releaseDate}
+                            Son Başvuru Tarihi: {result.applicaitonDeadline}
                           </Card.Description>
                         </Grid.Column>
                       </Grid.Row>

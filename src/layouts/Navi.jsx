@@ -38,18 +38,25 @@ export default function Navi() {
     <div className="naviBarDiv">
       <Menu className="naviBar" >
         <Container>
-          <Menu.Item name="building outline">
+          <Menu.Item style={{padding:"0 2em"}} name="building outline">
            <Link to="/"><Image src="/logo.png" size="tiny"></Image></Link> 
           </Menu.Item>
-          <Menu.Item ><Link to="/" style={{color:"black"}}>Ana Sayfa</Link></Menu.Item>
-          <Menu.Item name="building outline">
-            <Icon name="search" size="large" />
-           {" İş Ara"}
+          <Menu.Item style={{padding:"0 3em"}} ><Link to="/" style={{color:"black"}}>Ana Sayfa</Link></Menu.Item>
+          <Menu.Item style={{padding:"0 3em"}} name="building outline">
+            <Link to="jobpostings" style={{color:"black"}}> İş Ara</Link>
+           
           </Menu.Item>
-          <Menu.Item position="right">
-            {isAuthenticated?<SignedIn signOut={handleSignOut} />:<SignedOut signIn={handleSignIn} />}
+          <Menu.Item style={{padding:"0 3em"}} name="building outline">
+           Profil
           </Menu.Item>
+          <Menu.Item style={{padding:"0 3em"}} name="building outline">
+           Özgeçmiş
+          </Menu.Item>
+         
         </Container>
+        <div style={{marginRight:"5em"}}>
+            {isAuthenticated?<SignedIn signOut={handleSignOut} />:<SignedOut signIn={handleSignIn} />}
+          </div>
       </Menu>
     </div>
   );
