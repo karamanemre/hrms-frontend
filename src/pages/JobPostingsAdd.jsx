@@ -21,8 +21,6 @@ const options = [{ text: "Tam Zamanlı" }, { text: "Yarı Zamanlı" }];
 
 const options2 = [{ text: "İş yerinde" }, { text: "Uzaktan" }];
 
-console.log(options.push());
-
 export default function JobPostingsAdd() {
   const [city, setcity] = useState([]);
   const [jobpositions, setJobPositions] = useState([]);
@@ -250,7 +248,6 @@ export default function JobPostingsAdd() {
              
               <Button
                 primary
-                onClick={console.log(values)}
                 type="submit"
                 style={{ marginBottom: "6em", marginTop: "2em" }}
               >
