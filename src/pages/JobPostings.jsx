@@ -13,6 +13,7 @@ import {
 } from "semantic-ui-react";
 import CityService from "../services/cityService";
 import JobPositionService from "../services/jobPositionService";
+import { Dropdown } from "react-bootstrap";
 
 export default function JobPostings() {
   const [jobPostings, setjobPostings] = useState([]);
@@ -38,11 +39,21 @@ export default function JobPostings() {
       .then((result) => setJobPositions(result.data.data));
   }, []);
 
-  // {city.map((result) => (
-  //     { key: result.id, value:result.city, text: result.city }
-  //   ))}
-  //   console.log(result.key);
-
+  // let tarih = new Date();
+  // let d=tarih.getDay();
+  // let m=tarih.getMonth();
+  // let y=tarih.getFullYear();
+  // let today = y+'/'+m+'/'+ d;
+ 
+  // function setDay(releaseDate){
+  //   fark  = new Date(new Date() - releaseDate),
+  //   gun  = Math.floor(fark/1000/60/60/24);
+    
+  // }
+  // setDay(new Date("2020-10-10"))
+  
+ 
+  
   return (
     <div>
       <Grid>
@@ -51,9 +62,10 @@ export default function JobPostings() {
             width={5}
             style={{ paddingLeft: "8em", marginTop: "5em" }}
           >
-            <Card>
+            <Card style={{backgroundColor:"#F9F9F9"}}>
               <Card.Content>
                 <Card.Header style={{ textAlign: "left" }}>Şehir</Card.Header>
+                
               </Card.Content>
               <Card.Content>
                 <div style={{ textAlign: "left" }}>
@@ -67,14 +79,19 @@ export default function JobPostings() {
                   <br />
                   {city.map((result) => (
                     <div style={{ paddingBottom: "1em" }}>
-                      <Checkbox label={result.city} />
+                      <Dropdown>
+                        <Dropdown.Item scroll>
+                        <Checkbox label={result.city} />
+                        </Dropdown.Item>
+                      </Dropdown>
+                      
                     </div>
                   ))}
                 </div>
               </Card.Content>
             </Card>
             <br />
-            <Card>
+            <Card style={{backgroundColor:"#F9F9F9"}}>
               <Card.Content>
                 <Card.Header style={{ textAlign: "left" }}>
                   Pozisyon
@@ -101,7 +118,7 @@ export default function JobPostings() {
 
             <br />
 
-            <Card>
+            <Card style={{backgroundColor:"#F9F9F9"}}>
               <Card.Content>
                 <Card.Header style={{ textAlign: "left" }}>
                   Çalışma Türü
@@ -125,7 +142,7 @@ export default function JobPostings() {
             </Card>
             <br />
 
-            <Card>
+            <Card style={{backgroundColor:"#F9F9F9"}}>
               <Card.Content>
                 <Card.Header style={{ textAlign: "left" }}>
                   Çalışma Şekli
@@ -151,26 +168,47 @@ export default function JobPostings() {
 
           <Grid.Column width={11} style={{ paddingRight: "2em" }}>
             {jobPostings.map((result) => (
-              <Card fluid style={{ marginTop: "5em", paddingRight: "1em" }}>
+              
+              <Card fluid style={{ marginTop: "5em", paddingRight: "1em",backgroundColor:"#F9F9F9" }}>
+                
                 <Card.Content>
+                <Image src="./company.png" size="mini" style={{float:"left"}}></Image>
                   <Card.Header>{result.companyName}</Card.Header>
-                  <Card.Meta>{result.jobPosition}</Card.Meta>
+                  <Card.Meta style={{paddingBottom:"2em"}}>{result.jobPosition}</Card.Meta>
                   <Card.Description>
                     <Grid>
                       <Grid.Row>
-                        <Grid.Column width={7}>
+                        <Grid.Column>
+                          
                           <label style={{ float: "left" }}>
-                            Açıklama: {result.description}
+                          <strong> Açıklama:</strong> {result.description}
+                          </label>
+                          <br/>
+                          <label style={{ float: "left" }}>
+                          <strong>Çalışma Yeri:</strong> {result.workplace}
+                          </label>
+                          <br/>
+                          <label style={{ float: "left" }}>
+                          <strong>Çalışma Zamanı:</strong> {result.typeOfWork}
+                          </label>
+                          <br/>
+                          <label style={{ float: "left" }}>
+                          <strong>Açık Pozisyon Sayısı:</strong> {result.numberOfOpenPosition}
+                          </label>
+                          <br/>
+                          <label style={{ float: "left" }}>
+                          <strong>Son Başvuru Tarihi:</strong> {result.applicaitonDeadline}
+                          </label>
+                          <label style={{ float: "right" }}>
+                          
+  
+                         
+                          <Icon name="clock outline" color="blue"></Icon>({result.applicaitonDeadline})
                           </label>
                         </Grid.Column>
-                        <Grid.Column width={2}></Grid.Column>
-                        <Grid.Column width={7}>
-                          <Card.Description style={{ float: "right" }}>
-                            Açık Pozisyon Sayısı: {result.numberOfOpenPosition}
-                            <br />
-                            Son Başvuru Tarihi: {result.applicaitonDeadline}
-                          </Card.Description>
-                        </Grid.Column>
+                        
+                        
+                        
                       </Grid.Row>
                     </Grid>
                   </Card.Description>
@@ -187,6 +225,8 @@ export default function JobPostings() {
           </Grid.Column>
         </Grid.Row>
       </Grid>
+  
+  
     </div>
   );
 }

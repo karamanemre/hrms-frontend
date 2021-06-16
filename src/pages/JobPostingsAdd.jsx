@@ -10,6 +10,7 @@ import {
   Dropdown,
   Icon,
   Header,
+  TextArea
 } from "semantic-ui-react";
 import * as Yup from "yup";
 import JobPostingService from "../services/jobPostingsService";
@@ -57,7 +58,7 @@ export default function JobPostingsAdd() {
       description: "",
       applicaitonDeadline: "",
       workplace: "",
-      employerId: "43",
+      employerId: "52",
       cityId: "",
       jobPositionId: "",
       typeOfWork: "",
@@ -80,79 +81,14 @@ export default function JobPostingsAdd() {
               as="h2"
               icon
               textAlign="center"
-              style={{ marginTop: "4em", marginBottom: "2em" }}
+              style={{ marginTop: "3em", marginBottom: "2em" }}
             >
               <Header.Content>İş İlanı Ekle</Header.Content>
             </Header>
-
+            <div style={{width:"auto"}}>
             <form onSubmit={handleSubmit}>
+            
               <Form>
-                <Form.Field>
-                  <label style={{ float: "left" }}>Max Ücret</label>
-                  <input
-                    type="text"
-                    name="maxSalary"
-                    placeholder="Max. Ücret"
-                    onChange={handleChange}
-                    values={values.maxSalary}
-                  />
-                  {errors.maxSalary ? errors.maxSalary : null}
-                </Form.Field>
-
-                <Form.Field>
-                  <label style={{ float: "left" }}>Min Ücret</label>
-                  <input
-                    type="text"
-                    name="minSalary"
-                    placeholder="Min. Ücret"
-                    onChange={handleChange}
-                    values={values.minSalary}
-                  />
-                  {errors.minSalary ? errors.minSalary : null}
-                </Form.Field>
-
-                <Form.Field>
-                  <label style={{ float: "left" }}>Açıklama</label>
-                  <input
-                    type="text"
-                    name="description"
-                    placeholder="Açıklaması"
-                    onChange={handleChange}
-                    values={values.description}
-                  />
-                  {errors.jobDescription ? errors.jobDescription : null}
-                </Form.Field>
-
-                <Form.Field>
-                  <label style={{ float: "left" }}>Son Başvuru Tarihi</label>
-                  <input
-                    type="date"
-                    format="YYYY/DD/MM"
-                    name="applicaitonDeadline"
-                    placeholder="Son Başvuru Tarihi"
-                    onChange={handleChange}
-                    values={values.applicaitonDeadline}
-                  />
-                  {errors.applicaitonDeadline
-                    ? errors.applicaitonDeadline
-                    : null}
-                    
-                </Form.Field>
-
-                <Form.Field>
-                  <label style={{ float: "left" }}>Açık Pozisyon Sayısı</label>
-                  <input
-                    type="text"
-                    name="numberOfOpenPosition"
-                    placeholder="Açık pozisyon sayısı"
-                    onChange={handleChange}
-                    values={values.numberOfOpenPosition}
-                  />
-                  {errors.numberOfOpenPosition
-                    ? errors.numberOfOpenPosition
-                    : null}
-                </Form.Field>
-
                 <Form.Field>
                   <label style={{ float: "left" }}>Pozisyon</label>
                   <div className="form-group mt-2">
@@ -194,7 +130,7 @@ export default function JobPostingsAdd() {
                       ))}
                     </select>
                     <small id="emailHelp" className="form-text text-danger">
-                      {errors.city ? errors.city : null}
+                      {errors.cityId ? errors.cityId : null}
                     </small>
                   </div>
                 </Form.Field>
@@ -244,6 +180,74 @@ export default function JobPostingsAdd() {
                     </small>
                   </div>
                 </Form.Field>
+                
+                <Form.Field>
+                  <label style={{ float: "left" }}>Max Ücret</label>
+                  <input
+                    type="text"
+                    name="maxSalary"
+                    placeholder="Max. Ücret"
+                    onChange={handleChange}
+                    values={values.maxSalary}
+                  />
+                </Form.Field>
+
+                <Form.Field>
+                  <label style={{ float: "left" }}>Min Ücret</label>
+                  <input
+                    type="text"
+                    name="minSalary"
+                    placeholder="Min. Ücret"
+                    onChange={handleChange}
+                    values={values.minSalary}
+                  />
+                </Form.Field>
+
+                
+
+                <Form.Field>
+                  <label style={{ float: "left" }}>Son Başvuru Tarihi</label>
+                  <input
+                    type="date"
+                    format="YYYY/DD/MM"
+                    name="applicaitonDeadline"
+                    placeholder="Son Başvuru Tarihi"
+                    onChange={handleChange}
+                    values={values.applicaitonDeadline}
+                  />
+                  {errors.applicaitonDeadline
+                    ? errors.applicaitonDeadline
+                    : null}
+                    
+                </Form.Field>
+
+                <Form.Field>
+                  <label style={{ float: "left" }}>Açık Pozisyon Sayısı</label>
+                  <input
+                    type="text"
+                    name="numberOfOpenPosition"
+                    placeholder="Açık pozisyon sayısı"
+                    onChange={handleChange}
+                    values={values.numberOfOpenPosition}
+                   
+                  />
+                  {errors.numberOfOpenPosition
+                    ? errors.numberOfOpenPosition
+                    : null}
+                </Form.Field>
+
+                <Form.Field>
+                  <label style={{ float: "left" }}>Açıklama</label>
+                  <textarea
+                    type="text"
+                    label='About'
+                    name="description"
+                    placeholder="Açıklaması"
+                    onChange={handleChange}
+                    values={values.description}
+                  />
+                  {errors.description ? errors.description : null}
+                </Form.Field>
               </Form>
              
               <Button
@@ -254,11 +258,13 @@ export default function JobPostingsAdd() {
                 Yayınla
               </Button>
             </form>
+            </div>
           </Grid.Column>
           <Grid.Column width={4}></Grid.Column>
         </Grid.Row>
       </Grid>
       </div>
+      
     </div>
   );
 }

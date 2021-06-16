@@ -10,6 +10,7 @@ import {
   Grid,
   Feed,
   Input,
+  Header
 } from "semantic-ui-react";
 import { useFormik } from "formik";
 import JobPostingsService from "../services/jobPostingsService";
@@ -38,16 +39,23 @@ export default function JobPostingConfirmation() {
     <div style={{ marginTop: "3em" }}>
       <Grid>
         <Grid.Row>
-          <Grid.Column width={5}></Grid.Column>
+          <Grid.Column width={5}>
+            <Card fluid style={{position:"fixed",width:"30%",backgroundColor:"#F9F9F9"}}>
+              <Card.Header  textAlign="center">Onay Bekleyen {jobPostingsIsConfirmationFalse.length} Tane İş İlanı Var</Card.Header>
+            </Card>
+           </Grid.Column>
           <Grid.Column width={9}>
             <Card.Group>
               {jobPostingsIsConfirmationFalse.map((result) =>(
                 
-                  <Card fluid>
+                  <Card fluid style={{backgroundColor:"#F9F9F9"}}>
+                    
                   <Card.Content>
+                    
                     <Card.Header>Onay Bekleyen İlan</Card.Header>
+                    <Image src="./company.png" size="mini" style={{float:"right"}}></Image>
+                    
                     <Card.Description >
-                     
                       <div style={{float:"left"}}> İşveren Id: {result.employerId}</div>
                       <br/>
                       <div style={{float:"left"}}>  Şehir Id: {result.cityId}</div>
