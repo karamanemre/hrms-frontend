@@ -1,6 +1,7 @@
 import React from "react";
 import { useFormik } from "formik";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import {
   Button,
@@ -66,7 +67,7 @@ export default function JobPostingsAdd() {
     validationSchema,
     onSubmit: (values) => {
       let jobPostingService = new JobPostingService();
-      jobPostingService.add(values).then(alert("Başarıyla eklendi"));
+      jobPostingService.add(values).then(toast.success(`İş İlanı Eklendi`));
     },
   });
 

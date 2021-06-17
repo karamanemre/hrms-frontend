@@ -29,12 +29,13 @@ import Register from "./Auth/Register";
 import CandidateRegister from "./Auth/CandidateRegister";
 import JobPostingsAdd from "../pages/JobPostingsAdd";
 import JobPostingConfirmation from "../pages/JobPostingConfirmation";
-
+import { ToastContainer } from "react-toastify";
 
 
 export default function Dashboard() {
   return (
     <div className="dashboard">
+      <ToastContainer position="bottom-right"/>
       
       <Route exact path="/" component={Head}/>
       <Route exact path="/" component={Content}/>

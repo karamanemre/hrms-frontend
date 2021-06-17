@@ -20,4 +20,8 @@ export default class JobPostingsService{
     getByIsConfirmationFalse(){
         return axios.get("http://localhost:8080/api/jobposting/getAllByIsConfirmationFalse")
     }
+
+    getByIsConfirmation(){
+        return axios.get("http://localhost:8080/api/jobposting/getAllByIsConfirmation")
+    }
 }

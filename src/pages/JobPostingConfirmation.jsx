@@ -14,11 +14,18 @@ import {
 } from "semantic-ui-react";
 import { useFormik } from "formik";
 import JobPostingsService from "../services/jobPostingsService";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 export default function JobPostingConfirmation() {
 
   const [jobPostingsIsConfirmationFalse, setJobPostingsIsConfirmationFalse] = useState([]);
+ 
 
+  // const {jobPostingItem} = useSelector(state => state.jobPostings)
+  // {jobPostingItem.map((cartItem)=>(
+  //   console.log(cartItem)
+  // ))}
 
   useEffect(() => {
     let jobPostingsService = new JobPostingsService();
@@ -28,11 +35,9 @@ export default function JobPostingConfirmation() {
   function setIsConfirmation(id){
     let jobPostingsService = new JobPostingsService();
     jobPostingsService.uptadeIsConfirmation(id);
-    alert("Başarıyla Onaylandı") 
+    toast.success("İş İlanı Onaylandı");
+    
   } 
-
-
-
 
 
   return (
@@ -41,7 +46,7 @@ export default function JobPostingConfirmation() {
         <Grid.Row>
           <Grid.Column width={5}>
             <Card fluid style={{position:"fixed",width:"30%",backgroundColor:"#F9F9F9"}}>
-              <Card.Header  textAlign="center">Onay Bekleyen {jobPostingsIsConfirmationFalse.length} Tane İş İlanı Var</Card.Header>
+              <Card.Header style={{padding:"0.5em",color:"green"}}  textAlign="center">Onay Bekleyen {jobPostingsIsConfirmationFalse.length} Tane İş İlanı Var</Card.Header>
             </Card>
            </Grid.Column>
           <Grid.Column width={9}>
@@ -52,23 +57,23 @@ export default function JobPostingConfirmation() {
                     
                   <Card.Content>
                     
-                    <Card.Header>Onay Bekleyen İlan</Card.Header>
+                    <Card.Header>{result.companyName} - Onay Bekleyen İlan</Card.Header>
                     <Image src="./company.png" size="mini" style={{float:"right"}}></Image>
                     
                     <Card.Description >
-                      <div style={{float:"left"}}> İşveren Id: {result.employerId}</div>
+                      <div style={{float:"left"}}> <strong>Şirket İsmi:</strong> {result.companyName}</div>
                       <br/>
-                      <div style={{float:"left"}}>  Şehir Id: {result.cityId}</div>
+                      <div style={{float:"left"}}>  <strong>Şehir İsmi:</strong> {result.city}</div>
                       <br/>
-                      <div style={{float:"left"}}>  İş Pozisyonu Id: {result.jobPositionId}</div>
+                      <div style={{float:"left"}}>  <strong>İş Pozisyonu:</strong> {result.jobPosition}</div>
                       <br/>
-                      <div style={{float:"left"}}>  Açık Pozisyon Sayısı: {result.numberOfOpenPosition}</div>
+                      <div style={{float:"left"}}>  <strong>Açık Pozisyon Sayısı:</strong> {result.numberOfOpenPosition}</div>
                       <br/>
-                      <div style={{float:"left"}}>  Açıklama: {result.description}</div>
+                      <div style={{float:"left"}}> <strong> Açıklama:</strong> {result.description}</div>
                       <br/>
-                      <div style={{float:"left"}}>  Min. Maaş: {result.minSalary}</div>
+                      <div style={{float:"left"}}>  <strong>Min. Maaş:</strong> {result.minSalary}</div>
                       <br/>
-                      <div style={{float:"left"}}>  Maks. Maaş: {result.maxSalary}</div>
+                      <div style={{float:"left"}}>  <strong>Maks. Maaş:</strong> {result.maxSalary}</div>
                     </Card.Description>
                   </Card.Content>
                   <Card.Content extra>

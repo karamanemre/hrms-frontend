@@ -23,7 +23,7 @@ export default function JobPostings() {
   useEffect(() => {
     let jobPostingsService = new JobPostingsService();
     jobPostingsService
-      .getAll()
+      .getByIsConfirmation()
       .then((result) => setjobPostings(result.data.data));
   }, []);
 
@@ -38,19 +38,6 @@ export default function JobPostings() {
       .getAll()
       .then((result) => setJobPositions(result.data.data));
   }, []);
-
-  // let tarih = new Date();
-  // let d=tarih.getDay();
-  // let m=tarih.getMonth();
-  // let y=tarih.getFullYear();
-  // let today = y+'/'+m+'/'+ d;
- 
-  // function setDay(releaseDate){
-  //   fark  = new Date(new Date() - releaseDate),
-  //   gun  = Math.floor(fark/1000/60/60/24);
-    
-  // }
-  // setDay(new Date("2020-10-10"))
   
  
   
