@@ -53,7 +53,7 @@ export default function JobPostingConfirmation() {
             <Card.Group>
               {jobPostingsIsConfirmationFalse.map((result) =>(
                 
-                  <Card fluid style={{backgroundColor:"#F9F9F9"}}>
+                  <Card fluid style={{backgroundColor:"#F9F9F9"}} key={result.id}>
                     
                   <Card.Content>
                     
