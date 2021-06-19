@@ -31,6 +31,7 @@ import JobPostingsAdd from "../pages/JobPostingsAdd";
 import JobPostingConfirmation from "../pages/JobPostingConfirmation";
 import { ToastContainer } from "react-toastify";
 import EmployerDetail from "../pages/EmployerDetail";
+import CandidateCv from "../pages/CandidateCv";
 
 
 export default function Dashboard() {
@@ -48,6 +49,7 @@ export default function Dashboard() {
      <Route exact path="/jobpostingsadd" component={JobPostingsAdd} />
      <Route exact path="/jobpostingconfirmation" component={JobPostingConfirmation} />
      <Route exact path="/employerdetail/:id" component={EmployerDetail}/>
+     <Route exact path="/candidatecv" component={CandidateCv}/>
     </div>
   );
 }

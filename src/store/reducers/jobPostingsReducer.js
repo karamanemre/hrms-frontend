@@ -12,6 +12,7 @@ export default function jobPostingsReducer(state = initialState,{type,payload })
         case CONFİRM_POSTİNG:
            return{
                ...state,
+               jobPostingItem:state.jobPostingItem.filter(c => c.id!==payload.id)
            };
 
            default:

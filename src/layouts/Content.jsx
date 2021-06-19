@@ -143,7 +143,7 @@ export default function Content() {
 
 
 
-      <Grid>
+      <Grid style={{marginBottom:"10em"}}>
         <Grid.Row style={{paddingBottom:"0em", paddingRight:"5em",paddingLeft:"5em"}}>
           <Grid.Column style={{padding:"0"}} width={8}>
             <Reveal animated="fade">

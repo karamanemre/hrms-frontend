@@ -22,10 +22,8 @@ export default function JobPostingConfirmation() {
   const [jobPostingsIsConfirmationFalse, setJobPostingsIsConfirmationFalse] = useState([]);
  
 
-  // const {jobPostingItem} = useSelector(state => state.jobPostings)
-  // {jobPostingItem.map((cartItem)=>(
-  //   console.log(cartItem)
-  // ))}
+  const {jobPostingItem} = useSelector(state => state.jobPostings)
+  
 
   useEffect(() => {
     let jobPostingsService = new JobPostingsService();
@@ -39,9 +37,13 @@ export default function JobPostingConfirmation() {
     
   } 
 
+  
+
 
   return (
     <div style={{ marginTop: "3em" }}>
+    
+      
       <Grid>
         <Grid.Row>
           <Grid.Column width={5}>
