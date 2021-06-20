@@ -50,6 +50,7 @@ export default function CandidateRegister() {
                 icon="id card"
                 iconPosition="left"
                 placeholder="TC Kimlik No"
+                maxLength="11"
                 required
               />
               <br />
@@ -58,6 +59,7 @@ export default function CandidateRegister() {
                 icon="birthday"
                 iconPosition="left"
                 placeholder="Doğum Yılı"
+                maxLength="4"
                 type="number"
                 required
               />
@@ -67,7 +69,7 @@ export default function CandidateRegister() {
                 icon="mail"
                 iconPosition="left"
                 placeholder="E-Posta"
-                type="email"
+                refs="email"
                 required
               />
               <br />

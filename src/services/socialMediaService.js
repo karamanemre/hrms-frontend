@@ -8,6 +8,10 @@ export default class SocialMediaService{
     findByCandidateNumber(id){
         return axios.get("http://localhost:8080/api/socialMedia/findByCandidateNumber?id="+id)
     }
+
+    add(values){
+        return axios.post("http://localhost:8080/api/socialMedia/add",values)
+    }
 }
 
 

@@ -76,7 +76,7 @@ export default function CandidateCv() {
              
               </Card.Header>
               
-              <Card.Content>
+              <Card.Content style={{backgroundColor:"#F9F9F9"}}>
               <div  style={{float:"left",paddingTop:"1em",fontSize:"1.4em"}}> Kişisel Bilgiler</div><br/><br/><br/><br/>
               {candidate.map((result) => (
                 <div>
@@ -88,7 +88,7 @@ export default function CandidateCv() {
              
               </Card.Content>
 
-              <Card.Content>
+              <Card.Content  style={{backgroundColor:"#F9F9F9"}}>
               <div  style={{float:"left",paddingTop:"1em",fontSize:"1.4em"}}> Eğitim Bilgileri</div><br/><br/><br/><br/>
               {candidateSchool.map((result) => (
                 <div>
@@ -109,7 +109,7 @@ export default function CandidateCv() {
               
               </Card.Content>
 
-              <Card.Content>
+              <Card.Content  style={{backgroundColor:"#F9F9F9"}}>
               <div  style={{float:"left",paddingTop:"1em",fontSize:"1.4em"}}> Programlama Dilleri Ve Teknolojiler</div><br/><br/><br/><br/>
               {programmingLanguage.map((result) => (
               <div><div style={{float:"left"}}> Programlama Dili: {result.programminglanguage} </div><br/></div>
@@ -121,7 +121,7 @@ export default function CandidateCv() {
               </Card.Content>
               <br/>
 
-              <Card.Content>
+              <Card.Content  style={{backgroundColor:"#F9F9F9"}}>
               <div  style={{float:"left",paddingTop:"1em",fontSize:"1.4em"}}> Yabancı Diller</div><br/><br/><br/><br/>
               {language.map((result) => (
               <div><div style={{float:"left"}}> Yabancı Dil: {result.language} </div><br/></div>
@@ -129,14 +129,14 @@ export default function CandidateCv() {
              
               </Card.Content>
 
-              <Card.Content>
+              <Card.Content  style={{backgroundColor:"#F9F9F9"}}>
               <div  style={{float:"left",paddingTop:"1em",fontSize:"1.4em"}}> Deneyimler</div><br/><br/><br/><br/>
               {jobExperience.map((result) => (
               <div>
                 <div style={{float:"left"}}> Şirket İsmi: {result.companyName} </div><br/>
                 <div style={{float:"left"}}> Pozisyon: {result.positionName} </div><br/>
                 <div style={{float:"left"}}> Başlangıç Yılı: {result.startingYear} </div><br/>
-                <div style={{float:"left"}}> Pozisyon: {result.finishYear === null ? "Devam Ediyor" :result.finishYear} </div><br/><br/>
+                <div style={{float:"left"}}> Bitiş Yılı: {result.finishYear === null ? "Devam Ediyor" :result.finishYear} </div><br/><br/>
               
               </div>
               ))}
@@ -144,12 +144,12 @@ export default function CandidateCv() {
               </Card.Content>
 
 
-              <Card.Content>
+              <Card.Content  style={{backgroundColor:"#F9F9F9"}}>
               <div  style={{float:"left",paddingTop:"1em",fontSize:"1.4em"}}> Sosyal Medya</div><br/><br/><br/><br/>
               {socialMedia.map((result) => (
               <div>
-                <div style={{float:"left"}}> Linkedin: {result.linkedin} </div><br/>
-                <div style={{float:"left"}}> Github: {result.github} </div><br/>
+                <div style={{float:"left"}}><a href={result.linkedin} target="_blank"><Icon name="linkedin" color="blue"/>  {result.linkedin}</a> </div><br/><br/>
+                <div style={{float:"left"}}><a href={result.github} target="_blank"><Icon name="github"  color="blue"/> {result.github}</a>  </div><br/>
               </div>
               ))}
              

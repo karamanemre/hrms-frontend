@@ -32,6 +32,14 @@ import JobPostingConfirmation from "../pages/JobPostingConfirmation";
 import { ToastContainer } from "react-toastify";
 import EmployerDetail from "../pages/EmployerDetail";
 import CandidateCv from "../pages/CandidateCv";
+import CandidateCvAdd from "../pages/CandidateCvAdd";
+import CoverLatterAdd from "../pages/cvAdd/CoverLatterAdd";
+import SchoolAdd from "../pages/cvAdd/SchoolAdd";
+import ProgrammingLanguageAdd from "../pages/cvAdd/ProgrammingLanguageAdd";
+import LanguageAdd from "../pages/cvAdd/LanguageAdd";
+import TechnologyAdd from "../pages/cvAdd/TechnologyAdd";
+import JobExperienceAdd from "../pages/cvAdd/JobExperienceAdd";
+import SocialMediaAdd from "../pages/cvAdd/SocialMediaAdd";
 
 
 export default function Dashboard() {
@@ -50,6 +58,15 @@ export default function Dashboard() {
      <Route exact path="/jobpostingconfirmation" component={JobPostingConfirmation} />
      <Route exact path="/employerdetail/:id" component={EmployerDetail}/>
      <Route exact path="/candidatecv" component={CandidateCv}/>
+     <Route exact path="/candidatecvadd" component={CandidateCvAdd}/>
+     <Route exact path="/candidatecvadd/coverletteradd" component={CoverLatterAdd}/>
+     <Route exact path="/candidatecvadd/schooladd" component={SchoolAdd}/>
+     <Route exact path="/candidatecvadd/programminglanguageadd" component={ProgrammingLanguageAdd}/>
+     <Route exact path="/candidatecvadd/languageadd" component={LanguageAdd}/>
+     <Route exact path="/candidatecvadd/technologyadd" component={TechnologyAdd}/>
+     <Route exact path="/candidatecvadd/jobexperienceadd" component={JobExperienceAdd}/>
+     <Route exact path="/candidatecvadd/socialmediaadd" component={SocialMediaAdd}/>
+
     </div>
   );
 }

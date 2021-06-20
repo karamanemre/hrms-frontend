@@ -26,6 +26,7 @@ export default function Head() {
           <Dropdown.Menu className="dropDownMenu">
             <Dropdown.Item icon="caret right" ><Link  to="/jobpostings">İş Başvurusu Yap</Link></Dropdown.Item>
             <Dropdown.Item icon="caret right" text="Şirketler"><Link  to="/employers">Şirketler</Link></Dropdown.Item>
+            <Dropdown.Item icon="caret right" text="Şirketler"><Link  to="/candidatecvadd">Cv Ekle</Link></Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
 

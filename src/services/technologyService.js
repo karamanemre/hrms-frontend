@@ -8,4 +8,9 @@ export default class TechnologyService{
     findByCandidateNumberDto(id){
         return axios.get("http://localhost:8080/api/technology/findByDto?id="+id)
     }
+
+    add(values){
+        return axios.post("http://localhost:8080/api/technology/add",values)
+    }
+   
 }

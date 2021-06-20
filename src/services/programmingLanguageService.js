@@ -9,5 +9,9 @@ export default class ProgrammingLanguageService{
         return axios.get("http://localhost:8080/api/programminglanguage/findByDto?candidateId="+id)
     }
 
+    add(values){
+        return axios.post("http://localhost:8080/api/programminglanguage/add",values)
+    }
+
 
 }
