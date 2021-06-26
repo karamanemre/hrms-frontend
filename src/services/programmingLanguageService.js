@@ -13,5 +13,13 @@ export default class ProgrammingLanguageService{
         return axios.post("http://localhost:8080/api/programminglanguage/add",values)
     }
 
+    uptadeProgrammingLanguage(id,value){
+        return axios.put("http://localhost:8080/api/programminglanguage/uptadeprogramminglanguage?id="+id,value)
+    }
+
+    getByIdDto(id){
+        return axios.get("http://localhost:8080/api/programminglanguage/getByIdDto?id="+id)
+    }
+
 
 }

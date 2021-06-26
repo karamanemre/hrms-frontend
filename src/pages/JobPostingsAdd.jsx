@@ -17,11 +17,12 @@ import * as Yup from "yup";
 import JobPostingService from "../services/jobPostingsService";
 import JobPositionService from "../services/jobPositionService";
 import CityService from "../services/cityService";
+import  HrmsTextInput from "../utilities/customFormControls/HrmsTextInput";
 import { useHistory } from "react-router";
 
-const options = [{ text: "Tam Zamanlı" }, { text: "Yarı Zamanlı" }];
+const options = [{ text: "Tam Zamanlı",id:2 }, { text: "Yarı Zamanlı",id:3 }];
 
-const options2 = [{ text: "İş yerinde" }, { text: "Uzaktan" }];
+const options2 = [{ text: "İş yerinde",id:0 }, { text: "Uzaktan",id:1 }];
 
 export default function JobPostingsAdd() {
   const [city, setcity] = useState([]);
@@ -44,8 +45,8 @@ export default function JobPostingsAdd() {
     minSalary: Yup.number().required("Zorunlu Alan"),
     numberOfOpenPosition: Yup.string().required("Zorunlu Alan"),
     description: Yup.string().required("Zorunlu Alan"),
-    workplace: Yup.string().required("Zorunlu Alan"),
-    typeOfWork: Yup.string().required("Zorunlu Alan"),
+    workplace: Yup.number().required("Zorunlu Alan"),
+    typeOfWork: Yup.number().required("Zorunlu Alan"),
     employerId: Yup.number().required("Zorunlu Alan"),
     applicaitonDeadline: Yup.string().required("Zorunlu Alan"),
     cityId: Yup.number().required("Zorunlu Alan"),
@@ -70,6 +71,7 @@ export default function JobPostingsAdd() {
       jobPostingService.add(values).then(toast.success(`İş İlanı Eklendi`));
     },
   });
+  
 
   return (
     <div >
@@ -92,6 +94,7 @@ export default function JobPostingsAdd() {
               <Form>
                 <Form.Field>
                   <label style={{ float: "left" }}>Pozisyon</label>
+                 
                   <div className="form-group mt-2">
                     <select
                       className="form-control"
@@ -103,7 +106,7 @@ export default function JobPostingsAdd() {
                       <option value="">--</option>
                       {jobpositions.map((jobposition) => (
                         <option key={jobposition.id} value={jobposition.id}>
-                          {jobposition.positionName}
+                          {jobposition.positionName} 
                         </option>
                       ))}
                     </select>
@@ -148,9 +151,11 @@ export default function JobPostingsAdd() {
                     >
                       <option value="">--</option>
                       {options.map((options) => (
-                        <option key={options.text} value={options.text}>
+                        <option key={options.text} value={options.id}>
                           {options.text}
+                         
                         </option>
+                        
                       ))}
                     </select>
                     <small id="emailHelp" className="form-text text-danger">
@@ -171,7 +176,7 @@ export default function JobPostingsAdd() {
                     >
                       <option value="">--</option>
                       {options2.map((options) => (
-                        <option key={options.text} value={options.text}>
+                        <option key={options.text} value={options.id}>
                           {options.text}
                         </option>
                       ))}
@@ -184,6 +189,7 @@ export default function JobPostingsAdd() {
                 
                 <Form.Field>
                   <label style={{ float: "left" }}>Max Ücret</label>
+                  
                   <input
                     type="text"
                     name="maxSalary"

@@ -40,6 +40,14 @@ import LanguageAdd from "../pages/cvAdd/LanguageAdd";
 import TechnologyAdd from "../pages/cvAdd/TechnologyAdd";
 import JobExperienceAdd from "../pages/cvAdd/JobExperienceAdd";
 import SocialMediaAdd from "../pages/cvAdd/SocialMediaAdd";
+import FavoriteDetail from "../pages/FavoriteDetail";
+import CoverLetterUptade from "../pages/cvAdd/CoverLetterUptade";
+import JobExperienceUptade from "../pages/cvAdd/JobExperienceUptade";
+import LanguageUptade from "../pages/cvAdd/LanguageUptade";
+import ProgrammingLanguageUptade from "../pages/cvAdd/ProgrammingLanguageUptade";
+import SchoolUptade from "../pages/cvAdd/SchoollUptade";
+import SocialMediaUptade from "../pages/cvAdd/SocialMediaUptade";
+import TechnologyUptade from "../pages/cvAdd/TechnologyUptade";
 
 
 export default function Dashboard() {
@@ -66,6 +74,16 @@ export default function Dashboard() {
      <Route exact path="/candidatecvadd/technologyadd" component={TechnologyAdd}/>
      <Route exact path="/candidatecvadd/jobexperienceadd" component={JobExperienceAdd}/>
      <Route exact path="/candidatecvadd/socialmediaadd" component={SocialMediaAdd}/>
+     <Route exact path="/coverletteruptade" component={CoverLetterUptade}/>
+     <Route exact path="/jobexperienceuptade" component={JobExperienceUptade}/>
+     <Route exact path="/languageuptade" component={LanguageUptade}/>
+     <Route exact path="/programminglanguageuptade" component={ProgrammingLanguageUptade}/>
+     <Route exact path="/schooluptade" component={SchoolUptade}/>
+     <Route exact path="/socialmediauptade" component={SocialMediaUptade}/>
+     <Route exact path="/technologyuptade" component={TechnologyUptade}/>
+     
+     <Route exact path="/favoritedetail/:id" component={FavoriteDetail}/>
+    
 
     </div>
   );

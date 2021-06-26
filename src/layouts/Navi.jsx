@@ -17,6 +17,8 @@ import Footer from "./Footer";
 import Head from "./Head";
 import SignedIn from "./SignedIn";
 import SignedOut from "./SignedOut";
+import Favorite from "./Favorite";
+import { useSelector } from 'react-redux'
 
 export default function Navi() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -32,11 +34,15 @@ export default function Navi() {
     setIsAuthenticated(true);
   }
 
+  const {favoriteItems} = useSelector(state => state.favorite)
+
 
 
   return (
     <div className="naviBarDiv">
       <Menu className="naviBar" >
+     
+       
         <Container>
           <Menu.Item style={{padding:"0 2em"}} name="building outline">
            <Link to="/"><Image src="/logo.png" size="tiny"></Image></Link> 
@@ -49,13 +55,13 @@ export default function Navi() {
           <Menu.Item style={{padding:"0 3em"}} name="building outline">
            Profil
           </Menu.Item>
-          <Menu.Item style={{padding:"0 3em"}} name="building outline">
-           Özgeçmiş
-          </Menu.Item>
+         
          
         </Container>
+        <Favorite></Favorite>
         <div style={{marginRight:"5em"}}>
-            {isAuthenticated?<SignedIn signOut={handleSignOut} />:<SignedOut signIn={handleSignIn} />}
+            
+            {isAuthenticated?<SignedIn signOut={handleSignOut}  />:<SignedOut signIn={handleSignIn} />}
           </div>
       </Menu>
     </div>

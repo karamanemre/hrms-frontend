@@ -14,34 +14,44 @@ import {
 } from "semantic-ui-react";
 import { useFormik } from "formik";
 import JobPostingsService from "../services/jobPostingsService";
+import { changeActivation,
+  getAllEmployers} from "../store/actions/jobPostingsAction";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { render } from "@testing-library/react";
+
 
 export default function JobPostingConfirmation() {
 
   const [jobPostingsIsConfirmationFalse, setJobPostingsIsConfirmationFalse] = useState([]);
  
 
-  const {jobPostingItem} = useSelector(state => state.jobPostings)
-  
-
   useEffect(() => {
     let jobPostingsService = new JobPostingsService();
     jobPostingsService.getByIsConfirmationFalse().then((result) => setJobPostingsIsConfirmationFalse(result.data.data));
   }, []);
 
+  let a = jobPostingsIsConfirmationFalse.length
+
   function setIsConfirmation(id){
     let jobPostingsService = new JobPostingsService();
     jobPostingsService.uptadeIsConfirmation(id);
     toast.success("İş İlanı Onaylandı");
-    
-  } 
+  };
+
+
+  
+  const {jobPosting} = useSelector(state => state.jobPosting);
+  
+  
+  
 
   
 
-
   return (
     <div style={{ marginTop: "3em" }}>
+
+     
     
       
       <Grid>

@@ -1,22 +1,33 @@
-import { CONFİRM_POSTİNG } from "../actions/jobPostingsAction";
-import { jobPostingItem } from "../initialValues/jobPostingsItem";
+import { CHANGE_ACTIVATION, GET_ALL_FAILURE, GET_ALL_SUCCESS  } from "../actions/jobPostingsAction";
+import { jobPostings } from "../initialValues/jobPostingsItem";
 
 
 const initialState ={
-    jobPostingItem:jobPostingItem,
+    jobPostings:jobPostings,
 }
 
 
 export default function jobPostingsReducer(state = initialState,{type,payload }){
-    switch(type){
-        case CONFİRM_POSTİNG:
-           return{
-               ...state,
-               jobPostingItem:state.jobPostingItem.filter(c => c.id!==payload.id)
-           };
-
-           default:
-            return state
+    switch (type) {
+        case GET_ALL_SUCCESS:
+            return{
+                ...state,
+                jobPostings:payload
+            }
+        case GET_ALL_FAILURE:
+            return{
+                ...state,
+                message:payload
+            }
+       
+        case CHANGE_ACTIVATION:
+            let jobPostingIndex= state.jobPostings.findIndex(jobPosting=>jobPosting.id===payload.id)
+            return{
+                ...state,
+                jobPostings:state.jobPostings.map((jobPosting,i)=>i===jobPostingIndex?{...jobPosting,activated:!payload.activated}:jobPosting)
+            }
+        default:
+            return state;
     }
         
 }

@@ -12,4 +12,18 @@ export default class LanguageService{
     findByCandidateNumberDto(id){
         return axios.get("http://localhost:8080/api/language/findByCandidateNumberDto?candidateNumber="+id)
     }
+
+    uptadeLanguage(id,value){
+        return axios.put("http://localhost:8080/api/language/uptadelanguage?id="+id,value)
+    }
+
+    getByIdDto(id){
+        return axios.get("http://localhost:8080/api/language/getByIdDto?id="+id)
+    }
+
+    
+
+
+
+    
 }

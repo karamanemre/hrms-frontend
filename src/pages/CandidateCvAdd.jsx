@@ -31,47 +31,45 @@ export default function CandidateCvAdd() {
               <h3 style={{float:"left",fontSize:"2em"}}>Cv Ekle</h3>
                 <Card fluid style={{position:"relative",height:"400px"}} >
                   <Image style={{height:"400px"}} src="./cvcoverletteradd.jpg"></Image>
-                  <Card.Content><Link to="/candidatecvadd/coverletteradd"><Button color="green"  style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Ön Yazı Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/coverletteradd"><Button color="green"  style={{position:"absolute",bottom:"15em",left:"0",width:"300px",height:"50px"}}>Ön Yazı Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/coverletteradd"><Button color="green"  style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Güncelle </Button></Link></Card.Content>
                 </Card>
 
                 <Card fluid style={{position:"relative",height:"400px"}} >
                   <Image style={{height:"400px"}} src="./cvuniversityadd.jpg"></Image>
-                  <Card.Content><Link to="/candidatecvadd/schooladd"><Button color="green" size="big" style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Okul Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/schooladd"><Button color="green" size="big" style={{position:"absolute",bottom:"12em",left:"0",width:"300px",height:"50px"}}>Okul Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/coverletteradd"><Button color="green"  style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Güncelle </Button></Link></Card.Content>
                 </Card>
 
                 <Card fluid style={{position:"relative",height:"400px"}} >
                   <Image style={{height:"400px"}} src="./javadeveloper.png"></Image>
-                  <Card.Content><Link to="/candidatecvadd/programminglanguageadd"><Button color="green" size="big" style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Programlama Dili Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/programminglanguageadd"><Button color="green" size="big" style={{position:"absolute",bottom:"12em",left:"0",width:"300px",height:"50px"}}>Programlama Dili Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/coverletteradd"><Button color="green"  style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Güncelle </Button></Link></Card.Content>
                 </Card>
 
                 <Card fluid style={{position:"relative",height:"400px"}} >
                   <Image style={{height:"400px"}} src="./cvlanguageadd.jpg"></Image>
-                  <Card.Content><Link to="/candidatecvadd/languageadd"><Button color="green" size="big" style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Yabancı Dil Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/languageadd"><Button color="green" size="big" style={{position:"absolute",bottom:"12em",left:"0",width:"300px",height:"50px"}}>Yabancı Dil Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/coverletteradd"><Button color="green"  style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Güncelle </Button></Link></Card.Content>
                 </Card>
 
                 <Card fluid style={{position:"relative",height:"400px"}} >
                   <Image style={{height:"400px"}} src="./cvtechnologyadd.png"></Image>
-                  <Card.Content><Link to="/candidatecvadd/technologyadd"><Button color="green" size="big" style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Teknoloji Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/technologyadd"><Button color="green" size="big" style={{position:"absolute",bottom:"12em",left:"0",width:"300px",height:"50px"}}>Teknoloji Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/coverletteradd"><Button color="green"  style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Güncelle </Button></Link></Card.Content>
                 </Card>
 
                 <Card fluid style={{position:"relative",height:"400px"}} >
                   <Image style={{height:"400px"}} src="./cvjobexperienceadd.jpg"></Image>
-                  <Card.Content><Link to="/candidatecvadd/jobexperienceadd"><Button color="green" size="big" style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>İş Tecrübesi Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/jobexperienceadd"><Button color="green" size="big" style={{position:"absolute",bottom:"12em",left:"0",width:"300px",height:"50px"}}>İş Tecrübesi Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/coverletteradd"><Button color="green"  style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Güncelle </Button></Link></Card.Content>
                 </Card>
 
                 <Card fluid style={{position:"relative",height:"400px"}} >
                   <Image style={{height:"400px"}} src="./cvsocialmediaadd.png"></Image>
-                  <Card.Content><Link to="/candidatecvadd/socialmediaadd"><Button color="green" size="big" style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Sosyal Medya Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/socialmediaadd"><Button color="green" size="big" style={{position:"absolute",bottom:"12em",left:"0",width:"300px",height:"50px"}}>Sosyal Medya Ekle </Button></Link></Card.Content>
+                  <Card.Content><Link to="/candidatecvadd/coverletteradd"><Button color="green"  style={{position:"absolute",bottom:"10em",left:"0",width:"300px",height:"50px"}}>Güncelle </Button></Link></Card.Content>
                 </Card>
-
-                
-
-               
-
-
-
-               
-
                 
             </Grid.Column>
             <Grid.Column width={1}>
@@ -79,12 +77,6 @@ export default function CandidateCvAdd() {
 </Grid.Column>
           </Grid.Row>
         </Grid>
-       
-        
-       
-        
-        
-        
        
         
       </div>

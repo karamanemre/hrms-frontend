@@ -16,4 +16,11 @@ export default class SchoolService{
     add(values){
         return axios.post("http://localhost:8080/api/school/add",values)
     }
+
+    getById(id){
+        return axios.get("http://localhost:8080/api/school/getById?id=",id)
+    }
+    uptadeSchool(id,value){
+        return axios.put("http://localhost:8080/api/school/uptadeschool?id="+id,value)
+    }
 }

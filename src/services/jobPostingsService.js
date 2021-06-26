@@ -24,4 +24,29 @@ export default class JobPostingsService{
     getByIsConfirmation(){
         return axios.get("http://localhost:8080/api/jobposting/getAllByIsConfirmation")
     }
+
+    getAllPageSize(pageNo,pageSize){
+        return axios.get("http://localhost:8080/api/jobposting/getAllPageSize?pageNo="+pageNo+"&pageSize="+pageSize)
+    }
+
+    uptadeJobPosting(values){
+        return axios.get("http://localhost:8080/api/jobposting/uptadeJobPosting",values)
+    }
+
+    filterWorkplace(id){
+        return axios.get(" http://localhost:8080/api/jobposting/filterWorkplace?id="+id)
+    }
+
+    filterTypeOfWork(id){
+        return axios.get("http://localhost:8080/api/jobposting/filterTypeOfWork?id="+id)
+    }
+
+    getByIdDto(id){
+        return axios.get("http://localhost:8080/api/jobposting/getByIdDto?id="+id)
+    }
+
+    
+
+    
+   
 }
