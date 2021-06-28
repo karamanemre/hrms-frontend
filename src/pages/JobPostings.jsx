@@ -30,6 +30,7 @@ export default function JobPostings() {
   const [jobpositions, setJobPositions] = useState([]);
   const [pageSize, setPageSize] = useState([]);
   const dispatch = useDispatch();
+  
 
   const handleAddToFavorite=(posting)=>{
     dispatch(addToFavorite(posting))
@@ -45,39 +46,42 @@ export default function JobPostings() {
   // }, [])
 
 
-
+  let count=1;
+ console.log(count)
   const pagingOptions = {
     totalCount: jobPostings.length,
     pageSize : 2, 
     pageNo: 1, 
-    location:"aa",
   }
-
+  
+  
   function setPageNo(params) {
-    if (params==="next") {
-      let a = pagingOptions.pageNo+1;
-    pagingOptions.pageNo=a;
-    let jobPostingsService = new JobPostingsService();
-    jobPostingsService
-      .getAllPageSize(pagingOptions.pageNo,pagingOptions.pageSize)
-      .then((result) => setjobPostings(result.data.data));
-      console.log(pagingOptions)
-      return
-    }
-    if (params==="back") {
-      let a = pagingOptions.pageNo-1;
-    pagingOptions.pageNo=a;
-    if (pagingOptions.pageNo<1) {
-      alert("Sayfa Zaten En Başta")
-      return
-    }
-    let jobPostingsService = new JobPostingsService();
-    jobPostingsService
-      .getAllPageSize(pagingOptions.pageNo,pagingOptions.pageSize)
-      .then((result) => setjobPostings(result.data.data));
-      console.log(pagingOptions)
-      return
-    }
+   
+    // if (params==="next") {
+    // let a = pagingOptions.pageNo+1;
+    // pagingOptions.pageNo = a;
+    // count++;
+    // let jobPostingsService = new JobPostingsService();
+    // jobPostingsService
+    //   .getAllPageSize(pagingOptions.pageNo,pagingOptions.pageSize)
+    //   .then((result) => setjobPostings(result.data.data));
+    //   return 
+      
+      
+    // }console.log(count)
+    // if (params==="back") {
+    //   let a = pagingOptions.pageNo-1;
+    //   count--;
+    //   pagingOptions.pageNo = count;
+      
+    //   let jobPostingsService = new JobPostingsService();
+    //   jobPostingsService
+    //     .getAllPageSize(pagingOptions.pageNo,pagingOptions.pageSize)
+    //     .then((result) => setjobPostings(result.data.data));
+        
+    //     return 
+        
+    //   }
     let a = params;
     pagingOptions.pageNo=a;
     let jobPostingsService = new JobPostingsService();
@@ -153,15 +157,6 @@ export default function JobPostings() {
     }
     
   }
-
-  // function filterEmptyChange(option){
-  //   if (option.empty === false) {
-  //     option.empty == true;
-  //   }else{
-  //     option.empty == false;
-  //   }
-     
-  // };
 
   const workplace = [
     {
@@ -274,7 +269,9 @@ export default function JobPostings() {
                         checked: [],
                       }}
                       onSubmit={async (values) => {
-                        alert(JSON.stringify(values, null, 2));
+                        let jobPostingsService = new JobPostingService();
+                        jobPostingsService.filterCity(values).then((result) => setjobPostings(result.data.data))
+                        console.log(values)
                       }}
                     >
                       {({ values }) => (
@@ -286,7 +283,7 @@ export default function JobPostings() {
                                   <Field
                                     type="checkbox"
                                     name="checked"
-                                    value={result.city}
+                                    value={result.id}
                                   />
                                   {result.city}
                                 </label>
@@ -427,13 +424,20 @@ export default function JobPostings() {
             <Menu  pagination>
             
                
-              
+           
+            <Menu.Item   onClick={()=>setPageNo(count)} as='a' icon>
+              <Icon name='chevron left' />
+            </Menu.Item>
             <Menu.Item onClick={()=>setPageNo(1)} as='a'>1</Menu.Item>
             <Menu.Item onClick={()=>setPageNo(2)} as='a'>2</Menu.Item>
                <Menu.Item onClick={()=>setPageNo(3)} as='a'>3</Menu.Item>
                <Menu.Item   as='a'>20</Menu.Item>
                <Menu.Item   as='a'>50</Menu.Item>
                <Menu.Item   as='a'>100</Menu.Item>
+               <Menu.Item    onClick={()=>setPageNo(count)} as='a' icon>
+              <Icon name='chevron right' />
+            </Menu.Item>
+            
                
               
            

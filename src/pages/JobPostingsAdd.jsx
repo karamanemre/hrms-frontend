@@ -75,11 +75,11 @@ export default function JobPostingsAdd() {
 
   return (
     <div >
-      <div style={{backgroundColor:"#F9F9F9"}}>
+      <div >
       <Grid>
         <Grid.Row>
-          <Grid.Column width={4}></Grid.Column>
-          <Grid.Column width={8}>
+          <Grid.Column width={3}></Grid.Column>
+          <Grid.Column  width={10}>
             <Header
               as="h2"
               icon
@@ -91,8 +91,8 @@ export default function JobPostingsAdd() {
             <div style={{width:"auto"}}>
             <form onSubmit={handleSubmit}>
             
-              <Form>
-                <Form.Field>
+              <Form style={{border:"3px solid #F3F2EF",padding:"5em"}}>
+                <Form.Field >
                   <label style={{ float: "left" }}>Pozisyon</label>
                  
                   <div className="form-group mt-2">
@@ -116,7 +116,7 @@ export default function JobPostingsAdd() {
                   </div>
                 </Form.Field>
 
-                <Form.Field>
+                <Form.Field >
                   <label style={{ float: "left" }}>Şehir</label>
                   <div className="form-group mt-2">
                     <select
@@ -267,7 +267,7 @@ export default function JobPostingsAdd() {
             </form>
             </div>
           </Grid.Column>
-          <Grid.Column width={4}></Grid.Column>
+          <Grid.Column width={3}></Grid.Column>
         </Grid.Row>
       </Grid>
       </div>

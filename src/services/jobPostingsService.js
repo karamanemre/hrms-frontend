@@ -33,6 +33,10 @@ export default class JobPostingsService{
         return axios.get("http://localhost:8080/api/jobposting/uptadeJobPosting",values)
     }
 
+    getByIdDto(id){
+        return axios.get("http://localhost:8080/api/jobposting/getByIdDto?id="+id)
+    }
+
     filterWorkplace(id){
         return axios.get(" http://localhost:8080/api/jobposting/filterWorkplace?id="+id)
     }
@@ -41,9 +45,11 @@ export default class JobPostingsService{
         return axios.get("http://localhost:8080/api/jobposting/filterTypeOfWork?id="+id)
     }
 
-    getByIdDto(id){
-        return axios.get("http://localhost:8080/api/jobposting/getByIdDto?id="+id)
+    filterCity(cityFilter){
+        return axios.get("http://localhost:8080/api/jobposting/filterCity?cities="+68)
     }
+
+   
 
     
 

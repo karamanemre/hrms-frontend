@@ -58,7 +58,10 @@ export default function Navi() {
          
          
         </Container>
+       <Menu.Item>
         <Favorite></Favorite>
+        </Menu.Item>
+       
         <div style={{marginRight:"5em"}}>
             
             {isAuthenticated?<SignedIn signOut={handleSignOut}  />:<SignedOut signIn={handleSignIn} />}

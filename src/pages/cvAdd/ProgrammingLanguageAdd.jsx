@@ -51,13 +51,13 @@ export default function ProgrammingLanguageAdd() {
   });
 
   return (
-    <div>
+    <div style={{marginTop:"5em"}}>
       <Grid>
         <Grid.Row>
           <Grid.Column width="3"></Grid.Column>
           <Grid.Column width="10">
             <h2>Programlama Dili</h2>
-            <Card fluid style={{ padding: "4em", backgroundColor: "#F9F9F9" }}>
+            <Card fluid style={{ padding: "4em" }}>
               <form onSubmit={handleSubmit}>
                 <Form>
                   <Form.Field>

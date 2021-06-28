@@ -60,7 +60,7 @@ export default function SchoolAdd() {
           <Grid.Column width="3"></Grid.Column>
           <Grid.Column width="10">
               <h2>Okul Bilgileri</h2> 
-              <Card fluid style={{padding:"4em",backgroundColor:"#F9F9F9"}}>
+              <Card fluid style={{padding:"4em"}}>
             <form onSubmit={handleSubmit}>
               <Form>
                 <Form.Field>

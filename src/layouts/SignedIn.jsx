@@ -1,4 +1,5 @@
 import React from 'react'
+import Favorite from "./Favorite";
 import { Dropdown, Menu,Image } from 'semantic-ui-react'
 
 export default function SignedIn({signOut}) {
@@ -9,7 +10,9 @@ export default function SignedIn({signOut}) {
                 <Dropdown pointing="top right" text="Emre">
                     <Dropdown.Menu>
                         <Dropdown.Item text="Bilgilerim" icon="info"/>
+                        <Dropdown.Item  text="Favorilerim" icon="sign-out"><Favorite ></Favorite></Dropdown.Item>
                         <Dropdown.Item onClick={signOut} text="Çıkış Yap" icon="sign-out"/>
+                        
                     </Dropdown.Menu>
                 </Dropdown>
 

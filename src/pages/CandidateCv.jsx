@@ -16,7 +16,8 @@ export default function CandidateCv() {
   const [candidateLanguage, setcandidateLanguage] = useState([]);
   const [candidateSchool, setcandidateSchool] = useState([]);
   const [programmingLanguage, setprogrammingLanguage] = useState([]);
-  const [programmingLanguageNameList, setprogrammingLanguageNameList] = useState([]);
+  const [programmingLanguageNameList, setprogrammingLanguageNameList] =
+    useState([]);
   const [technology, settechnology] = useState([]);
   const [language, setlanguage] = useState([]);
   const [jobExperience, setjobExperience] = useState([]);
@@ -61,9 +62,13 @@ export default function CandidateCv() {
       .then((result) => setsocialMedia(result.data.data));
   }, []);
 
+
+  
+
   return (
     <div style={{ marginTop: "5em", padding: "1em 0" }}>
-      <h2>Özgeçmiş</h2>
+      
+      <h2 >Özgeçmiş</h2>
       <Grid>
         <Grid.Row>
           <Grid.Column width={4}></Grid.Column>
@@ -80,7 +85,7 @@ export default function CandidateCv() {
                   }}
                 >
                   {" "}
-                  Kişisel Bilgiler
+                  <h2 style={{color:"#1087EB"}} >Kişisel Bilgiler</h2>
                 </div>
                 <br />
                 <br />
@@ -93,7 +98,7 @@ export default function CandidateCv() {
                         <div>
                           <div style={{ float: "left" }}>
                             {" "}
-                            İsim: {result.firstName}{" "}
+                            İsim: {result.firstName} {result.lastName}{" "}
                           </div>
                           <br />
                           <div style={{ float: "left" }}>
@@ -104,7 +109,7 @@ export default function CandidateCv() {
                       ))}
                     </Grid.Column>
                     <Grid.Column width={4}>
-                      <Image  src="./logo.png" ></Image>
+                      <Image src="./logo.png"></Image>
                     </Grid.Column>
                   </Grid.Row>
                 </Grid>
@@ -119,7 +124,7 @@ export default function CandidateCv() {
                   }}
                 >
                   {" "}
-                  Eğitim Bilgileri
+                 <h2 style={{color:"#1087EB"}}> Eğitim Bilgileri</h2>
                 </div>
                 <br />
                 <br />
@@ -127,32 +132,57 @@ export default function CandidateCv() {
                 <br />
                 {candidateSchool.map((result) => (
                   <div>
-                    <div style={{ float: "left" }}>
-                      {" "}
-                      Okul: {result.schoolNameList.schoolName}
-                    </div>
-                    <br />
-                    <div style={{ float: "left" }}>
-                      Başlangıç Yılı: {result.startingYear}
-                    </div>
-                    <br />
-                    <div style={{ float: "left" }}>
-                      Bitiş Yılı:{" "}
-                      {result.finishYear === null
-                        ? "Devam Ediyor"
-                        : result.finishYear}
-                    </div>
+                    <Grid>
+                      <Grid.Row>
+                        <Grid.Column width={5}>
+                          <div style={{ float: "left" }}> Okul İsmi</div>
+                          <br />
+                          <br />
+                          <div style={{ float: "left" }}>Başlangıç Yılı</div>
+                          <br />
+                          <br />
+                          <div style={{ float: "left" }}>Bitiş Yılı</div>
+                        </Grid.Column>
+                        <Grid.Column width={11}>
+                          <div style={{ float: "left" }}>
+                            {" "}
+                            {result.schoolNameList.schoolName}
+                          </div>
+                          <br />
+                          <br />
+                          <div style={{ float: "left" }}>
+                            {result.startingYear}
+                          </div>
+                          <br />
+                          <br />
+                          <div style={{ float: "left" }}>
+                            {" "}
+                            {result.finishYear === null
+                              ? "Devam Ediyor"
+                              : result.finishYear}
+                          </div>
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
                   </div>
                 ))}
-                <br />
-                <br />
                 {candidateSchool.map((result) => (
                   <div>
-                    <div style={{ float: "left" }}>
-                      {" "}
-                      Bölüm: {result.schoollSection.section}
-                    </div>
-                    <br />
+                    <Grid>
+                      <Grid.Row>
+                        <Grid.Column width={5}>
+                          <div style={{ float: "left" }}> Bölüm</div>
+                          <br />
+                        </Grid.Column>
+                        <Grid.Column width={11}>
+                          <div style={{ float: "left" }}>
+                            {" "}
+                            {result.schoollSection.section}
+                          </div>
+                          <br />
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
                   </div>
                 ))}
                 <br />
@@ -167,7 +197,7 @@ export default function CandidateCv() {
                   }}
                 >
                   {" "}
-                  Programlama Dilleri Ve Teknolojiler
+                 <h2 style={{color:"#1087EB"}}>Programlama Dilleri Ve Teknolojiler</h2> 
                 </div>
                 <br />
                 <br />
@@ -177,7 +207,7 @@ export default function CandidateCv() {
                   <div>
                     <div style={{ float: "left" }}>
                       {" "}
-                       {result.programminglanguage}{" "}
+                      {result.programminglanguage}{" "}
                     </div>
                     <br />
                   </div>
@@ -185,10 +215,7 @@ export default function CandidateCv() {
                 <br />
                 {technology.map((result) => (
                   <div>
-                    <div style={{ float: "left" }}>
-                      {" "}
-                     {result.technology}
-                    </div>
+                    <div style={{ float: "left" }}> {result.technology}</div>
                     <br />
                   </div>
                 ))}
@@ -203,7 +230,7 @@ export default function CandidateCv() {
                   }}
                 >
                   {" "}
-                  Yabancı Diller
+                  <h2 style={{color:"#1087EB"}}>Yabancı Diller</h2>
                 </div>
                 <br />
                 <br />
@@ -211,10 +238,7 @@ export default function CandidateCv() {
                 <br />
                 {language.map((result) => (
                   <div>
-                    <div style={{ float: "left" }}>
-                      {" "}
-                      {result.language}{" "}
-                    </div>
+                    <div style={{ float: "left" }}> {result.language} </div>
                     <br />
                   </div>
                 ))}
@@ -229,7 +253,7 @@ export default function CandidateCv() {
                   }}
                 >
                   {" "}
-                  Deneyimler
+                  <h2 style={{color:"#1087EB"}}>Deneyimler</h2> 
                 </div>
                 <br />
                 <br />
@@ -237,30 +261,48 @@ export default function CandidateCv() {
                 <br />
                 {jobExperience.map((result) => (
                   <div>
-                    <div style={{ float: "left" }}>
-                      {" "}
-                      Şirket İsmi: {result.companyName}{" "}
-                    </div>
-                    <br />
-                    <div style={{ float: "left" }}>
-                      {" "}
-                      Pozisyon: {result.positionName}{" "}
-                    </div>
-                    <br />
-                    <div style={{ float: "left" }}>
-                      {" "}
-                      Başlangıç Yılı: {result.startingYear}{" "}
-                    </div>
-                    <br />
-                    <div style={{ float: "left" }}>
-                      {" "}
-                      Bitiş Yılı:{" "}
-                      {result.finishYear === null
-                        ? "Devam Ediyor"
-                        : result.finishYear}{" "}
-                    </div>
-                    <br />
-                    <br />
+                    <Grid>
+                      <Grid.Row>
+                        <Grid.Column width={5}>
+                          <div style={{ float: "left" }}> Şirket İsmi:</div>
+                          <br />
+
+                          <div style={{ float: "left" }}> Pozisyon:</div>
+                          <br />
+                          <div style={{ float: "left" }}> Başlangıç Yılı:</div>
+                          <br />
+                          <div style={{ float: "left" }}> Bitiş Yılı:</div>
+                          <br />
+                          <br />
+                        </Grid.Column>
+                        <Grid.Column width={11}>
+                          <div style={{ float: "left" }}>
+                            {" "}
+                            {result.companyName}{" "}
+                          </div>
+                          <br />
+
+                          <div style={{ float: "left" }}>
+                            {" "}
+                            {result.positionName}{" "}
+                          </div>
+                          <br />
+                          <div style={{ float: "left" }}>
+                            {" "}
+                            {result.startingYear}{" "}
+                          </div>
+                          <br />
+                          <div style={{ float: "left" }}>
+                            {" "}
+                            {result.finishYear === null
+                              ? "Devam Ediyor"
+                              : result.finishYear}{" "}
+                          </div>
+                          <br />
+                          <br />
+                        </Grid.Column>
+                      </Grid.Row>
+                    </Grid>
                   </div>
                 ))}
               </Card.Content>
@@ -274,7 +316,7 @@ export default function CandidateCv() {
                   }}
                 >
                   {" "}
-                  Sosyal Medya
+                  <h2 style={{color:"#1087EB"}}>Sosyal Medya</h2>
                 </div>
                 <br />
                 <br />

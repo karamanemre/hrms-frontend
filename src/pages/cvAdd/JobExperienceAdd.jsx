@@ -49,7 +49,7 @@ export default function JobExperienceAdd() {
       <Grid>
         <Grid.Row>
           <Grid.Column width="3"></Grid.Column>
-          <Grid.Column width="10">
+          <Grid.Column width="10" style={{border:"3px solid #F3F2EF",padding:"3em"}}>
             <form onSubmit={handleSubmit}>
               <Form>
                 <Form.Field>
