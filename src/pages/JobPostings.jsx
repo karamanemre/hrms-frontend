@@ -4,6 +4,7 @@ import JobPostingsService from "../services/jobPostingsService";
 import {
   Button,
   Card,
+  Pagination,
   Checkbox,
   Image,
   Icon,
@@ -11,7 +12,7 @@ import {
   Feed,
   Input,
   Dropdown,
-  Menu
+  Menu,
 } from "semantic-ui-react";
 import ReactDOM from "react-dom";
 import { Formik, Field, Form } from "formik";
@@ -21,96 +22,50 @@ import JobPostingService from "../services/jobPostingsService";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { addToFavorite } from "../store/actions/favoriteActions";
+import { favoriteItems } from "../store/initialValues/favoriteItem";
 import { number } from "yup";
 import { render } from "@testing-library/react";
 
 export default function JobPostings() {
   const [jobPostings, setjobPostings] = useState([]);
+  const [getAll, setgetAll] = useState([]);
   const [city, setCity] = useState([]);
   const [jobpositions, setJobPositions] = useState([]);
-  const [pageSize, setPageSize] = useState([]);
   const dispatch = useDispatch();
-  
+  const [pageSize, setPageSize] = useState(10);
 
-  const handleAddToFavorite=(posting)=>{
-    dispatch(addToFavorite(posting))
-  }
+  const handleAddToFavorite = (posting) => {
+    dispatch(addToFavorite(posting));
+  };
 
-
-
-  // const [activePage, setActivePage] = useState();
-  // let jobPostingService = new JobPostingService();
-  // useEffect(() => {
-  //   jobPostingService.getAllPageSize(pagingOptions.pageNo,pagingOptions.pageSize)
-  //     .then((result) => setActivePage(result.data.data));
-  // }, [])
-
-
-  let count=1;
- console.log(count)
+ 
   const pagingOptions = {
-    totalCount: jobPostings.length,
-    pageSize : 2, 
-    pageNo: 1, 
-  }
-  
+    totalCount: getAll.length,
+    pageSize: 2,
+    pageNo:1
+  };
   
   function setPageNo(params) {
-   
-    // if (params==="next") {
-    // let a = pagingOptions.pageNo+1;
-    // pagingOptions.pageNo = a;
-    // count++;
-    // let jobPostingsService = new JobPostingsService();
-    // jobPostingsService
-    //   .getAllPageSize(pagingOptions.pageNo,pagingOptions.pageSize)
-    //   .then((result) => setjobPostings(result.data.data));
-    //   return 
-      
-      
-    // }console.log(count)
-    // if (params==="back") {
-    //   let a = pagingOptions.pageNo-1;
-    //   count--;
-    //   pagingOptions.pageNo = count;
-      
-    //   let jobPostingsService = new JobPostingsService();
-    //   jobPostingsService
-    //     .getAllPageSize(pagingOptions.pageNo,pagingOptions.pageSize)
-    //     .then((result) => setjobPostings(result.data.data));
-        
-    //     return 
-        
-    //   }
-    let a = params;
-    pagingOptions.pageNo=a;
     let jobPostingsService = new JobPostingsService();
     jobPostingsService
-      .getAllPageSize(pagingOptions.pageNo,pagingOptions.pageSize)
+      .getAllPageSize(params, pagingOptions.pageSize)
       .then((result) => setjobPostings(result.data.data));
-      console.log(pagingOptions)
-      return
-    
+    console.log(pagingOptions);
+    return;
   }
-
-
-
-  function getTotalPage() {
-    return Math.ceil(pagingOptions.totalCount/pagingOptions.itemPerPage )
-  }
-
-  
-
-
-  
-
-
 
   useEffect(() => {
     let jobPostingsService = new JobPostingsService();
     jobPostingsService
-      .getAllPageSize(pagingOptions.pageNo,pagingOptions.pageSize)
+      .getAllPageSize(pagingOptions.pageNo, pagingOptions.pageSize)
       .then((result) => setjobPostings(result.data.data));
+  }, []);
+
+  useEffect(() => {
+    let jobPostingsService = new JobPostingsService();
+    jobPostingsService
+      .getAll()
+      .then((result) => setgetAll(result.data.data));
   }, []);
 
   useEffect(() => {
@@ -124,10 +79,6 @@ export default function JobPostings() {
       .getAll()
       .then((result) => setJobPositions(result.data.data));
   }, []);
-
-  
-  
-
 
   function filterFunction(params) {
     if (params == 0) {
@@ -153,9 +104,7 @@ export default function JobPostings() {
       jobPostingsService
         .filterTypeOfWork(3)
         .then((result) => setjobPostings(result.data.data));
-
     }
-    
   }
 
   const workplace = [
@@ -188,14 +137,11 @@ export default function JobPostings() {
     },
   ];
 
-  
 
- 
-  
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
   return (
     <div>
-      
-      
       <Grid style={{ paddingTop: "1em" }}>
         <div style={{ width: "93%" }}>
           <Dropdown
@@ -222,9 +168,8 @@ export default function JobPostings() {
                   <Dropdown.Item
                     key={option.value}
                     {...option}
-                    onClick={() => filterFunction(option.value)  }
+                    onClick={() => filterFunction(option.value)}
                     // onClick={()=>filterEmptyChange(option) }
-                      
                   />
                 ))}
               </Dropdown.Menu>
@@ -233,10 +178,8 @@ export default function JobPostings() {
                   <Dropdown.Item
                     key={option.value}
                     {...option}
-                    onClick={() => filterFunction(option.value) }
+                    onClick={() => filterFunction(option.value)}
                     // onClick={()=>filterEmptyChange(option) }
-                   
-              
                   />
                 ))}
               </Dropdown.Menu>
@@ -246,9 +189,18 @@ export default function JobPostings() {
         </div>
 
         <Grid.Row>
-          
           <Grid.Column width={5} style={{ paddingLeft: "3em" }}>
-          <div style={{backgroundColor:"#F9F9F9",paddingTop:"0.5em",paddingBottom:"0.5em" ,width:"68%",paddingLeft:"2em"}}>{jobPostings.length} Adet İş İlanı Listelendi</div>
+            <div
+              style={{
+                backgroundColor: "#F9F9F9",
+                paddingTop: "0.5em",
+                paddingBottom: "0.5em",
+                width: "68%",
+                paddingLeft: "2em",
+              }}
+            >
+              {jobPostings.length} Adet İş İlanı Listelendi
+            </div>
             <Card style={{ backgroundColor: "#F9F9F9" }}>
               <Card.Content>
                 <Card.Header style={{ textAlign: "left" }}>Şehir</Card.Header>
@@ -266,12 +218,31 @@ export default function JobPostings() {
                   <div style={{ paddingBottom: "1em" }}>
                     <Formik
                       initialValues={{
+                        toggle: false,
                         checked: [],
                       }}
                       onSubmit={async (values) => {
+                        await sleep(300);
+                        JSON.stringify(values, null, 2);
                         let jobPostingsService = new JobPostingService();
-                        jobPostingsService.filterCity(values).then((result) => setjobPostings(result.data.data))
-                        console.log(values)
+                        let a;
+                        if (values.checked.length > 1) {
+                          for (let z = 0; z < values.checked.length; z++) {
+                            a += "cities=" + values.checked[z] + "&";
+                          }
+                          a = a.replace("undefined", "");
+                          a = a.substring(0, a.length - 1);
+                        }
+                        if (values.checked.length === 1) {
+                          a = "cities=" + values.checked;
+                        }
+                        if (values.checked.length === 0) {
+                          return;
+                        }
+                        console.log(a);
+                        jobPostingsService
+                          .filterCity(a)
+                          .then((result) => setjobPostings(result.data.data));
                       }}
                     >
                       {({ values }) => (
@@ -291,9 +262,8 @@ export default function JobPostings() {
                               </div>
                             ))}
                           </div>
-                          <Card.Description extra>
-                            <button type="submit">Filtrele</button>
-                          </Card.Description>
+
+                          <button type="submit">Filtrele</button>
                         </Form>
                       )}
                     </Formik>
@@ -327,9 +297,6 @@ export default function JobPostings() {
                 </div>
               </Card.Content>
             </Card>
-
-          
-
           </Grid.Column>
 
           <Grid.Column width={10} style={{ paddingRight: "2em" }}>
@@ -339,7 +306,7 @@ export default function JobPostings() {
                 style={{
                   paddingRight: "1em",
                   backgroundColor: "#F9F9F9",
-                  marginBottom:"3em"
+                  marginBottom: "3em",
                 }}
               >
                 <Card.Content>
@@ -349,17 +316,18 @@ export default function JobPostings() {
                     style={{ float: "left" }}
                   ></Image>
 
-                   <Button  animated style={{float:"right",backgroundColor:"#F9F9F9"}}
-                   onClick={()=>handleAddToFavorite(result)}
-                   >
-                      <Button.Content visible><Icon className="starIcon" name="star" /></Button.Content>
-                      <Button.Content hidden >
-                        Ekle
-                      </Button.Content>
-                    </Button>
+                  <Button
+                    animated
+                    style={{ float: "right", backgroundColor: "#F9F9F9" }}
+                    onClick={() => handleAddToFavorite(result)}
+                  >
+                    <Button.Content visible>
+                      <Icon className="starIcon" name="star" />
+                    </Button.Content>
+                    <Button.Content hidden>Ekle</Button.Content>
+                  </Button>
 
-                  <Card.Header>{result.companyName}
-                  </Card.Header>
+                  <Card.Header>{result.companyName}</Card.Header>
                   <Card.Meta style={{ paddingBottom: "2em" }}>
                     {result.jobPosition}
                   </Card.Meta>
@@ -416,33 +384,21 @@ export default function JobPostings() {
                     <Button basic color="green">
                       Başvur
                     </Button>
-                    
                   </div>
                 </Card.Content>
               </Card>
             ))}
-            <Menu  pagination>
-            
-               
-           
-            <Menu.Item   onClick={()=>setPageNo(count)} as='a' icon>
-              <Icon name='chevron left' />
-            </Menu.Item>
-            <Menu.Item onClick={()=>setPageNo(1)} as='a'>1</Menu.Item>
-            <Menu.Item onClick={()=>setPageNo(2)} as='a'>2</Menu.Item>
-               <Menu.Item onClick={()=>setPageNo(3)} as='a'>3</Menu.Item>
-               <Menu.Item   as='a'>20</Menu.Item>
-               <Menu.Item   as='a'>50</Menu.Item>
-               <Menu.Item   as='a'>100</Menu.Item>
-               <Menu.Item    onClick={()=>setPageNo(count)} as='a' icon>
-              <Icon name='chevron right' />
-            </Menu.Item>
-            
-               
-              
-           
-          
-          </Menu>
+
+            <Pagination
+              defaultActivePage={1}
+              totalPages={Math.ceil(pagingOptions.totalCount/pagingOptions.pageSize)}
+              onPageChange={(event, data) => (
+                data.activePage,
+                pageSize,
+                setPageNo(data.activePage)
+
+              )}
+            />
           </Grid.Column>
           <Grid.Column width={1}></Grid.Column>
         </Grid.Row>

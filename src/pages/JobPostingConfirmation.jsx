@@ -37,6 +37,7 @@ export default function JobPostingConfirmation() {
     let jobPostingsService = new JobPostingsService();
     jobPostingsService.uptadeIsConfirmation(id);
     toast.success("İş İlanı Onaylandı");
+   
   };
 
 

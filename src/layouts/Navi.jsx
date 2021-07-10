@@ -40,7 +40,7 @@ export default function Navi() {
 
   return (
     <div className="naviBarDiv">
-      <Menu className="naviBar" >
+      <Menu className="naviBar"  >
      
        
         <Container>

@@ -12,5 +12,17 @@ export default class EmployerService{
     getByIdList(id){
         return axios.get("http://localhost:8080/api/jobposting/getByIdList?id="+id);
     }
+
+    employerUptadeConfirmation(id){
+        return axios.put("http://localhost:8080/api/employers/updateConfirmation?userId="+id)
+    }
+
+    getByUptadeConfirmationWait(){
+        return axios.get("http://localhost:8080/api/employers/getByUptadeConfirmationWait")
+    }
+
+    employerUptade(values){
+        return axios.put("http://localhost:8080/api/employers/uptadeEmployers",values)
+    }
 }
 

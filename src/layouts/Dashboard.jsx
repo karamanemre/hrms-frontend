@@ -48,6 +48,8 @@ import ProgrammingLanguageUptade from "../pages/cvAdd/ProgrammingLanguageUptade"
 import SchoolUptade from "../pages/cvAdd/SchoollUptade";
 import SocialMediaUptade from "../pages/cvAdd/SocialMediaUptade";
 import TechnologyUptade from "../pages/cvAdd/TechnologyUptade";
+import EmployersUptadeConfirmation from "../pages/EmployersUptadeConfirmation";
+import EmployersUptade from "../pages/EmployersUptade";
 
 
 export default function Dashboard() {
@@ -81,6 +83,8 @@ export default function Dashboard() {
      <Route exact path="/schooluptade" component={SchoolUptade}/>
      <Route exact path="/socialmediauptade" component={SocialMediaUptade}/>
      <Route exact path="/technologyuptade" component={TechnologyUptade}/>
+     <Route exact path="/employersuptadeconfirmation" component={EmployersUptadeConfirmation}/>
+     <Route exact path="/employersuptade" component={EmployersUptade}/>
      
      <Route exact path="/favoritedetail/:id" component={FavoriteDetail}/>
     

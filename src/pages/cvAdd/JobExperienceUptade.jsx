@@ -27,16 +27,18 @@ export default function CoverLatterAdd() {
   useEffect(() => {
     let jobExperienceService = new JobExperienceService();
     jobExperienceService
-      .getById(10)
-      .then((result) => setjobExperienceDefault(result.data));
+      .findByCandidateNumber(47)
+      .then((result) => setjobExperienceDefault(result.data.data));
   }, []);
+ 
 
   const validationSchema = Yup.object({
-    companyName: Yup.string().required("Zorunlu Alan"),
-    candidateNumber: Yup.number().required("Zorunlu Alan"),
-    finishYear: Yup.string().required("Zorunlu Alan"),
-    startingYear: Yup.date().required("Zorunlu Alan"),
-    positionName: Yup.string().required("Zorunlu Alan"),
+    companyName: Yup.string(),
+    candidateNumber: Yup.number(),
+    finishYear: Yup.string(),
+    startingYear: Yup.date(),
+    positionName: Yup.string(),
+    adId:Yup.string().required("Lütfen Güncellemek İstediğiniz İlanın Id Numarasını Girin"),
   });
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
@@ -46,15 +48,17 @@ export default function CoverLatterAdd() {
       finishYear: "",
       startingYear: "",
       positionName: "",
+      adId:"",
     },
     validationSchema,
     onSubmit: (values) => {
       let jobExperienceService = new JobExperienceService();
+     
       jobExperienceService
-        .uptadeJobExperience(10,values)
+        .uptadeJobExperience(values.adId,values)
         .then(toast.success("İş Tecrübesi Güncellendi"),history.push("/candidatecvadd"));
     },
-  });
+  }); console.log(values)
  
 
   return (
@@ -65,17 +69,33 @@ export default function CoverLatterAdd() {
           
           </Grid.Column>
           <Grid.Column width="4">
-          <Card style={{color:"#1087EB"}}>
-              <Card.Header style={{color:"black"}} >Yüklü İş Tecrübesi</Card.Header>
-              <Card.Content >Şirket İsmi : {jobExperienceDefault.companyName}</Card.Content>
-              <Card.Content >Pozisyon İsmi: {jobExperienceDefault.positionName}</Card.Content>
-              <Card.Content >Başlangıç Yılı: {jobExperienceDefault.startingYear}</Card.Content>
-              <Card.Content >Bitiş Yılı: {jobExperienceDefault.finishYear}</Card.Content>
-            </Card>
+            {jobExperienceDefault.map((result)=>(
+              <Card style={{color:"#1087EB"}}>
+                <Card.Header style={{color:"black"}} >Kayıtlı İş Tecrübeleri</Card.Header>
+                <Card.Content >İlan No : {result.id}</Card.Content>
+                <Card.Content >Şirket İsmi : {result.companyName}</Card.Content>
+                <Card.Content >Pozisyon İsmi: {result.positionName}</Card.Content>
+                <Card.Content >Başlangıç Yılı: {result.startingYear}</Card.Content>
+                <Card.Content >Bitiş Yılı: {result.finishYear}</Card.Content>
+              </Card>
+            ))}
+          
           </Grid.Column>
           <Grid.Column width="10">
             <form onSubmit={handleSubmit}>
               <Form>
+              <Form.Field>
+                  <label style={{ float: "left" }}>İlan Id</label>
+                  <input
+                    type="text"
+                    name="adId"
+                    placeholder="Güncellemek istediğiniz ilanın id numarası"
+                    onChange={handleChange}
+                    values={values.adId}
+                  />
+                  {errors.adId ? errors.adId : null}
+                </Form.Field>
+
                 <Form.Field>
                   <label style={{ float: "left" }}>Şirket İsmi</label>
                   <input
@@ -85,7 +105,7 @@ export default function CoverLatterAdd() {
                     onChange={handleChange}
                     values={values.companyName}
                   />
-                  {errors.companyName ? errors.companyName : null}
+                 
                 </Form.Field>
 
                 <Form.Field>
@@ -97,7 +117,7 @@ export default function CoverLatterAdd() {
                     onChange={handleChange}
                     values={values.positionName}
                   />
-                  {errors.positionName ? errors.positionName : null}
+                 
                 </Form.Field>
 
                 <Form.Field>
@@ -109,7 +129,7 @@ export default function CoverLatterAdd() {
                     onChange={handleChange}
                     values={values.startingYear}
                   />
-                  {errors.startingYear ? errors.startingYear : null}
+                  
                 </Form.Field>
 
                 <Form.Field>
@@ -121,7 +141,7 @@ export default function CoverLatterAdd() {
                     onChange={handleChange}
                     values={values.finishYear}
                   />
-                  {errors.finishYear ? errors.finishYear : null}
+                
                 </Form.Field>
               </Form>
 

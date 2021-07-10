@@ -13,10 +13,11 @@ import {
   Card,
   Image,
   Feed,
-  Reveal,
+  Reveal, Modal
 } from "semantic-ui-react";
 
 export default function Content() {
+  const [open, setOpen] = React.useState(false)
   return (
     <div>
       <div className="jobPostitionsCard">
@@ -146,9 +147,9 @@ export default function Content() {
       <Grid style={{marginBottom:"10em"}}>
         <Grid.Row style={{paddingBottom:"0em", paddingRight:"5em",paddingLeft:"5em"}}>
           <Grid.Column style={{padding:"0"}} width={8}>
-            <Reveal animated="fade">
+            <Reveal animated="fade" >
               <Reveal.Content visible>
-                <Image
+                <Image 
                   src="./javadeveloper.png"
                   size="huge"
                   style={{height:"400px"}}
@@ -276,6 +277,37 @@ export default function Content() {
            
         </Grid.Row>
       </Grid>
+      {/* <Modal
+      onClose={() => setOpen(false)}
+      onOpen={() => setOpen(true)}
+      open={open}
+      trigger={<Button>Show Modal</Button>}
+    >
+      <Modal.Header>Select a Photo</Modal.Header>
+      <Modal.Content image>
+        <Image size='medium' src='/images/avatar/large/rachel.png' wrapped />
+        <Modal.Description>
+          <Header>Default Profile Image</Header>
+          <p>
+            We've found the following gravatar image associated with your e-mail
+            address.
+          </p>
+          <p>Is it okay to use this photo?</p>
+        </Modal.Description>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button color='black' onClick={() => setOpen(false)}>
+          Nope
+        </Button>
+        <Button
+          content="Yep, that's me"
+          labelPosition='right'
+          icon='checkmark'
+          onClick={() => setOpen(false)}
+          positive
+        />
+      </Modal.Actions>
+    </Modal> */}
     </div>
   );
 }

@@ -29,8 +29,8 @@ export default function CoverLatterAdd() {
   useEffect(() => {
     let languageService = new LanguageService();
     languageService
-      .getByIdDto(13)
-      .then((result) => setlanguageDefault(result.data));
+      .findByCandidateNumberDto(47)
+      .then((result) => setlanguageDefault(result.data.data));
   }, []);
 
   useEffect(() => {
@@ -41,12 +41,12 @@ export default function CoverLatterAdd() {
   }, []);
 
   const validationSchema = Yup.object({
-    languageId: Yup.number().required("Zorunlu Alan"),
+    languageId: Yup.number(),
     candidateNumber: Yup.number().required("Zorunlu Alan"),
     languageLevel: Yup.number()
       .max(5, "Seviye 0-5 arası olmalı")
-      .min(0, "Seviye 0-5 arası olmalı")
-      .required("Zorunlu Alan"),
+      .min(0, "Seviye 0-5 arası olmalı"),
+    adId:Yup.number().required("Değiştirmek İstediğiniz Dilin Id Numarasını Girin")  
   });
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
@@ -54,12 +54,13 @@ export default function CoverLatterAdd() {
       candidateNumber: "47",
       languageId: "",
       languageLevel: "",
+      adId:"",
     },
     validationSchema,
     onSubmit: (values) => {
       let languageService = new LanguageService();
       languageService
-        .uptadeLanguage(13, values)
+        .uptadeLanguage(values.adId, values)
         .then(
           toast.success("Dil Güncellendi"),
           history.push("/candidatecvadd")
@@ -75,11 +76,18 @@ export default function CoverLatterAdd() {
           <Grid.Column width="3" style={{ marginTop: "8em" }}>
             <Card style={{ color: "#1087EB" }}>
               <Card.Header style={{ color: "black" }}>
-                Yüklü Yabancı Dil
+                Kayıtlı Yabancı Dil
               </Card.Header>
-              <Card.Content>
-                Yabancı Dil : {languageDefault.language}
-              </Card.Content>
+              {languageDefault.map((result) =>(
+                 <Card.Content>
+                  Id : {result.id}
+                 <br/>
+                 Yabancı Dil : {result.language}
+                 <br/>
+                 Dil Seviyesi : {result.languageLevel}
+               </Card.Content>
+              ))}
+             
             </Card>
           </Grid.Column>
           <Grid.Column width="11" style={{ marginTop: "5em" }}>
@@ -87,6 +95,18 @@ export default function CoverLatterAdd() {
             <Card fluid style={{ padding: "4em", backgroundColor: "#F9F9F9" }}>
               <form onSubmit={handleSubmit}>
                 <Form>
+                <Form.Field>
+                    <label style={{ float: "left" }}>Id</label>
+                    <input
+                      type="number"
+                      name="adId"
+                      placeholder="Id"
+                      onChange={handleChange}
+                      values={values.adId}
+                    />
+                    {errors.adId ? errors.adId : null}
+                  </Form.Field>
+                  
                   <Form.Field>
                     <label style={{ float: "left" }}>Yabancı Dil</label>
                     <div className="form-group mt-2">
@@ -123,6 +143,7 @@ export default function CoverLatterAdd() {
                     />
                     {errors.languageLevel ? errors.languageLevel : null}
                   </Form.Field>
+                 
                 </Form>
 
                 <Button

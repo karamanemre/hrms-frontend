@@ -46,7 +46,8 @@ export default class JobPostingsService{
     }
 
     filterCity(cityFilter){
-        return axios.get("http://localhost:8080/api/jobposting/filterCity?cities="+68)
+        return axios.get("http://localhost:8080/api/jobposting/filterCity?"+cityFilter)
+       
     }
 
    
