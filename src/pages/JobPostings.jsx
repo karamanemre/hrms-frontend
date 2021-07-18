@@ -38,13 +38,12 @@ export default function JobPostings() {
     dispatch(addToFavorite(posting));
   };
 
- 
   const pagingOptions = {
     totalCount: getAll.length,
     pageSize: 2,
-    pageNo:1
+    pageNo: 1,
   };
-  
+
   function setPageNo(params) {
     let jobPostingsService = new JobPostingsService();
     jobPostingsService
@@ -63,9 +62,7 @@ export default function JobPostings() {
 
   useEffect(() => {
     let jobPostingsService = new JobPostingsService();
-    jobPostingsService
-      .getAll()
-      .then((result) => setgetAll(result.data.data));
+    jobPostingsService.getAll().then((result) => setgetAll(result.data.data));
   }, []);
 
   useEffect(() => {
@@ -137,7 +134,6 @@ export default function JobPostings() {
     },
   ];
 
-
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
   return (
@@ -190,40 +186,21 @@ export default function JobPostings() {
 
         <Grid.Row>
           <Grid.Column width={5} style={{ paddingLeft: "3em" }}>
-            <div
-              style={{
-                backgroundColor: "#F9F9F9",
-                paddingTop: "0.5em",
-                paddingBottom: "0.5em",
-                width: "68%",
-                paddingLeft: "2em",
-              }}
-            >
-              {jobPostings.length} Adet İş İlanı Listelendi
-            </div>
-            <Card style={{ backgroundColor: "#F9F9F9" }}>
-              <Card.Content>
-                <Card.Header style={{ textAlign: "left" }}>Şehir</Card.Header>
-              </Card.Content>
-              <Card.Content style={{ overflowY: "scroll", height: "300px" }}>
+            <Card style={{ backgroundColor: "#FFFFFF", borderStyle: "hidden" }}>
+              <Card.Content style={{ height: "auto" }}>
                 <div style={{ textAlign: "left" }}>
-                  <div>
-                    <Input
-                      icon="search"
-                      iconPosition="left"
-                      placeholder="Şehir Ara"
-                    />
-                  </div>
-                  <br />
                   <div style={{ paddingBottom: "1em" }}>
                     <Formik
                       initialValues={{
                         toggle: false,
                         checked: [],
+                        position:[],
+                        
                       }}
                       onSubmit={async (values) => {
                         await sleep(300);
                         JSON.stringify(values, null, 2);
+                        
                         let jobPostingsService = new JobPostingService();
                         let a;
                         if (values.checked.length > 1) {
@@ -231,39 +208,132 @@ export default function JobPostings() {
                             a += "cities=" + values.checked[z] + "&";
                           }
                           a = a.replace("undefined", "");
-                          a = a.substring(0, a.length - 1);
+                          
                         }
-                        if (values.checked.length === 1) {
-                          a = "cities=" + values.checked;
+                        if (values.checked.length === 1 && values.position.length === 0) {
+                          a = "cities=" + values.checked+"&";
+                          for (let z = 0; z < jobpositions.length; z++) {
+                           a += "positions="+jobpositions[z].id+"&"
+                          }
+                          
                         }
-                        if (values.checked.length === 0) {
+                        if (values.checked.length === 0 && values.position.length === 1) {
+                          for (let z = 0; z < city.length; z++) {
+                           a += "cities="+city[z].id+"&"
+                           
+                          }
+                          a = a.replace("undefined", "");
+                          a += "positions=" + values.position;
+                        }
+                        if (values.checked.length === 1 && values.position.length === 1) {
+                          a = "cities="+values.checked+"&"
+                          a += "positions=" + values.position;
+                          a = a.replace("undefined", "");
+                         
+                        }
+                        // if (values.checked.length === 1 && values.position.length > 1 || values.checked.length > 1 && values.position.length === 1) {
+                        //   a = "cities="+values.checked+"&"
+                        //   a += "positions=" + values.position;
+                        //   a = a.replace("undefined", "");
+                         
+                        // }
+                        if (values.checked.length === 0 && values.position.length === 0) {
                           return;
                         }
+                        if (values.position.length > 1) {
+                          for (let z = 0; z < values.position.length; z++) {
+                            a += "positions=" + values.position[z] + "&";
+                          }
+                          a = a.replace("undefined", "");
+                          a = a.substring(0, a.length - 1);
+                        }
+                       
                         console.log(a);
                         jobPostingsService
-                          .filterCity(a)
+                          .filterCityAndPosition(a)
                           .then((result) => setjobPostings(result.data.data));
                       }}
                     >
                       {({ values }) => (
+                       
                         <Form>
-                          <div role="group" aria-labelledby="checkbox-group">
-                            {city.map((result) => (
-                              <div style={{ paddingBottom: "0.5em" }}>
-                                <label>
-                                  <Field
-                                    type="checkbox"
-                                    name="checked"
-                                    value={result.id}
+                           {console.log(values)}
+                          <Card style={{ backgroundColor: "#F9F9F9" }}>
+                            <Card.Content>
+                              <Card.Header style={{ textAlign: "left" }}>
+                                Şehir
+                              </Card.Header>
+                            </Card.Content>
+                            <Card.Content>
+                              <Card.Content
+                                style={{ overflowY: "scroll", height: "300px" }}
+                              >
+                                <div>
+                                  <Input
+                                    icon="search"
+                                    iconPosition="left"
+                                    placeholder="Şehir Ara"
                                   />
-                                  {result.city}
-                                </label>
+                                </div>
                                 <br />
-                              </div>
-                            ))}
-                          </div>
+                                <div
+                                  role="group"
+                                  aria-labelledby="checkbox-group"
+                                >
+                                  {city.map((result) => (
+                                    <div style={{ paddingBottom: "0.5em" }}>
+                                      <Field
+                                        key={result.id}
+                                        type="checkbox"
+                                        name="checked"
+                                        value={result.id}
+                                      />
 
-                          <button type="submit">Filtrele</button>
+                                      {result.city}
+
+                                      <br />
+                                    </div>
+                                  ))}
+                                </div>
+                              </Card.Content>
+                            </Card.Content>
+                          </Card>
+
+                          <Card style={{ backgroundColor: "#F9F9F9" }}>
+                            <Card.Content>
+                              <Card.Header style={{ textAlign: "left" }}>
+                                Pozisyon
+                              </Card.Header>
+                            </Card.Content>
+                            <Card.Content
+                              style={{ overflowY: "scroll", height: "300px" }}
+                            >
+                              <div style={{ textAlign: "left" }}>
+                                <div>
+                                  <Input
+                                    icon="search"
+                                    iconPosition="left"
+                                    placeholder="Pozisyon Ara"
+                                  />
+                                </div>
+                                <br />
+                                {jobpositions.map((result) => (
+                                  <div role="group" aria-labelledby="checkbox-group" style={{ paddingBottom: "1em" }}>
+                                    <Field
+                                        key={result.id}
+                                        type="checkbox"
+                                        name="position"
+                                        value={result.id}
+                                      />
+                                       {result.positionName}
+                                  </div>
+                                ))}
+                              </div>
+                            </Card.Content>
+                          </Card>
+
+                          <Button fluid type="submit" color='green'>Filtrele</Button>
+                          
                         </Form>
                       )}
                     </Formik>
@@ -273,30 +343,6 @@ export default function JobPostings() {
             </Card>
 
             <br />
-            <Card style={{ backgroundColor: "#F9F9F9" }}>
-              <Card.Content>
-                <Card.Header style={{ textAlign: "left" }}>
-                  Pozisyon
-                </Card.Header>
-              </Card.Content>
-              <Card.Content style={{ overflowY: "scroll", height: "300px" }}>
-                <div style={{ textAlign: "left" }}>
-                  <div>
-                    <Input
-                      icon="search"
-                      iconPosition="left"
-                      placeholder="Pozisyon Ara"
-                    />
-                  </div>
-                  <br />
-                  {jobpositions.map((result) => (
-                    <div style={{ paddingBottom: "1em" }}>
-                      <Checkbox label={result.positionName} />
-                    </div>
-                  ))}
-                </div>
-              </Card.Content>
-            </Card>
           </Grid.Column>
 
           <Grid.Column width={10} style={{ paddingRight: "2em" }}>
@@ -391,12 +437,11 @@ export default function JobPostings() {
 
             <Pagination
               defaultActivePage={1}
-              totalPages={Math.ceil(pagingOptions.totalCount/pagingOptions.pageSize)}
+              totalPages={Math.ceil(
+                pagingOptions.totalCount / pagingOptions.pageSize
+              )}
               onPageChange={(event, data) => (
-                data.activePage,
-                pageSize,
-                setPageNo(data.activePage)
-
+                data.activePage, pageSize, setPageNo(data.activePage)
               )}
             />
           </Grid.Column>
