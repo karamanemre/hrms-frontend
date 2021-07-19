@@ -203,51 +203,45 @@ export default function JobPostings() {
                         
                         let jobPostingsService = new JobPostingService();
                         let a;
-                        if (values.checked.length > 1) {
+                        let b;
+                        if (values.checked.length > 0 && values.position.length > 0) {
                           for (let z = 0; z < values.checked.length; z++) {
                             a += "cities=" + values.checked[z] + "&";
                           }
-                          a = a.replace("undefined", "");
-                          
-                        }
-                        if (values.checked.length === 1 && values.position.length === 0) {
-                          a = "cities=" + values.checked+"&";
-                          for (let z = 0; z < jobpositions.length; z++) {
-                           a += "positions="+jobpositions[z].id+"&"
+                          for (let z = 0; z < values.position.length; z++) {
+                            b += "positions=" + values.position[z] + "&";
                           }
-                          
+                          a += b;
+                          a = a.replace("undefined", "");
+                          a = a.replace("undefinedpositions", "positions");
                         }
-                        if (values.checked.length === 0 && values.position.length === 1) {
+                        if (values.checked.length > 0 && values.position.length === 0) {
+                          for (let z = 0; z < values.checked.length; z++) {
+                              a += "cities=" + values.checked[z] + "&";
+                          }
+                          for (let z = 0; z < jobpositions.length; z++) {
+                           b += "positions="+jobpositions[z].id+"&"
+                          }
+                          a+=b;
+                          a = a.replace("undefinedpositions", "positions");
+                          a = a.replace("undefined", "");
+                        }
+                        if (values.checked.length === 0 && values.position.length > 0) {
                           for (let z = 0; z < city.length; z++) {
                            a += "cities="+city[z].id+"&"
-                           
                           }
-                          a = a.replace("undefined", "");
-                          a += "positions=" + values.position;
-                        }
-                        if (values.checked.length === 1 && values.position.length === 1) {
-                          a = "cities="+values.checked+"&"
-                          a += "positions=" + values.position;
-                          a = a.replace("undefined", "");
-                         
-                        }
-                        // if (values.checked.length === 1 && values.position.length > 1 || values.checked.length > 1 && values.position.length === 1) {
-                        //   a = "cities="+values.checked+"&"
-                        //   a += "positions=" + values.position;
-                        //   a = a.replace("undefined", "");
-                         
-                        // }
-                        if (values.checked.length === 0 && values.position.length === 0) {
-                          return;
-                        }
-                        if (values.position.length > 1) {
                           for (let z = 0; z < values.position.length; z++) {
-                            a += "positions=" + values.position[z] + "&";
+                            b += "positions=" + values.position[z] + "&";
                           }
+                          a+=b;
+                          a = a.replace("undefinedpositions", "positions");
                           a = a.replace("undefined", "");
-                          a = a.substring(0, a.length - 1);
                         }
-                       
+                        if (values.checked.length === 0 && values.position.length === 0) {
+                         return
+                        }
+                        a = a.substring(0, a.length - 1);
+                        
                         console.log(a);
                         jobPostingsService
                           .filterCityAndPosition(a)
