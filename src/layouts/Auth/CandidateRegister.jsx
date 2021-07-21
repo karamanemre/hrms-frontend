@@ -60,7 +60,7 @@ export default function CandidateRegister() {
                 iconPosition="left"
                 placeholder="Doğum Yılı"
                 maxLength="4"
-                type="number"
+                
                 required
               />
               <br />

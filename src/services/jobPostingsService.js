@@ -45,10 +45,16 @@ export default class JobPostingsService{
         return axios.get("http://localhost:8080/api/jobposting/filterTypeOfWork?id="+id)
     }
 
-    filterCityAndPosition(cityFilter){
-        return axios.get("http://localhost:8080/api/jobposting/filterCityAndPosition?"+cityFilter)
-   
-       
+    filterCityPositionTypeWorkWorkPlace(cityFilter){
+        return axios.get("http://localhost:8080/api/jobposting/filterCityPositionTypeWorkWorkPlace?"+cityFilter)
+    }
+
+    orderByAsc(){
+        return axios.get("http://localhost:8080/api/jobposting/getAllByIsActiveTrueOrderByApplicaitonDeadlineAsc?bool=true")
+    }
+
+    orderByDesc(){
+        return axios.get("http://localhost:8080/api/jobposting/getAllByIsActiveTrueOrderByApplicaitonDeadlineDesc?bool=true")
     }
 
    

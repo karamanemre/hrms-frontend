@@ -13,6 +13,7 @@ import {
   Input,
   Dropdown,
   Menu,
+  Label,
 } from "semantic-ui-react";
 import ReactDOM from "react-dom";
 import { Formik, Field, Form } from "formik";
@@ -77,33 +78,22 @@ export default function JobPostings() {
       .then((result) => setJobPositions(result.data.data));
   }, []);
 
-  function filterFunction(params) {
-    if (params == 0) {
-      let jobPostingsService = new JobPostingsService();
+  function orderByFunction(params) {
+    let jobPostingsService = new JobPostingsService();
+    
+    if (params === "desc") {
       jobPostingsService
-        .filterWorkplace(0)
-        .then((result) => setPageSize(result.data.data));
+      .orderByDesc()
+      .then((result) => setjobPostings(result.data.data));
     }
-    if (params == 1) {
-      let jobPostingsService = new JobPostingsService();
+    if (params === "asc") {
       jobPostingsService
-        .filterWorkplace(1)
-        .then((result) => setjobPostings(result.data.data));
+      .orderByAsc()
+      .then((result) => setjobPostings(result.data.data));
     }
-    if (params == 2) {
-      let jobPostingsService = new JobPostingsService();
-      jobPostingsService
-        .filterTypeOfWork(2)
-        .then((result) => setjobPostings(result.data.data));
-    }
-    if (params == 3) {
-      let jobPostingsService = new JobPostingsService();
-      jobPostingsService
-        .filterTypeOfWork(3)
-        .then((result) => setjobPostings(result.data.data));
-    }
+    
   }
-
+ 
   const workplace = [
     {
       key: 0,
@@ -134,12 +124,30 @@ export default function JobPostings() {
     },
   ];
 
+  const descOrAsc = [
+    {
+      key: 0,
+      text: "Artan Tarih",
+      value: "asc",
+      label: { color: "red", empty: true, circular: true },
+    },
+    {
+      key: 1,
+      text: "Azalan Tarih",
+      value: "desc",
+      label: { color: "red", empty: true, circular: true },
+    },
+  ];
+
+  
+
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
   return (
     <div>
       <Grid style={{ paddingTop: "1em" }}>
         <div style={{ width: "93%" }}>
+         
           <Dropdown
             style={{
               float: "right",
@@ -149,7 +157,7 @@ export default function JobPostings() {
               marginBottom: "2em",
               paddingBottom: "1em",
             }}
-            text="Filtrele"
+            text="Sırala"
             icon="filter"
             floating
             labeled
@@ -160,28 +168,16 @@ export default function JobPostings() {
               <Dropdown.Divider />
               <Dropdown.Header icon="tags" content="Filtrele" />
               <Dropdown.Menu scrolling>
-                {typeOfWork.map((option) => (
+                {descOrAsc.map((option) => (
                   <Dropdown.Item
                     key={option.value}
                     {...option}
-                    onClick={() => filterFunction(option.value)}
-                    // onClick={()=>filterEmptyChange(option) }
-                  />
-                ))}
-              </Dropdown.Menu>
-              <Dropdown.Menu scrolling>
-                {workplace.map((option) => (
-                  <Dropdown.Item
-                    key={option.value}
-                    {...option}
-                    onClick={() => filterFunction(option.value)}
-                    // onClick={()=>filterEmptyChange(option) }
+                    onClick={() => orderByFunction(option.value)}
                   />
                 ))}
               </Dropdown.Menu>
             </Dropdown.Menu>
           </Dropdown>
-          <div></div>
         </div>
 
         <Grid.Row>
@@ -194,64 +190,184 @@ export default function JobPostings() {
                       initialValues={{
                         toggle: false,
                         checked: [],
-                        position:[],
-                        
+                        position: [],
+                        workingTime: [],
+                        workEnvironment :[],
                       }}
                       onSubmit={async (values) => {
                         await sleep(300);
                         JSON.stringify(values, null, 2);
-                        
+
                         let jobPostingsService = new JobPostingService();
                         let a;
-                        let b;
-                        if (values.checked.length > 0 && values.position.length > 0) {
-                          for (let z = 0; z < values.checked.length; z++) {
-                            a += "cities=" + values.checked[z] + "&";
-                          }
-                          for (let z = 0; z < values.position.length; z++) {
-                            b += "positions=" + values.position[z] + "&";
-                          }
-                          a += b;
-                          a = a.replace("undefined", "");
-                          a = a.replace("undefinedpositions", "positions");
-                        }
-                        if (values.checked.length > 0 && values.position.length === 0) {
-                          for (let z = 0; z < values.checked.length; z++) {
-                              a += "cities=" + values.checked[z] + "&";
-                          }
-                          for (let z = 0; z < jobpositions.length; z++) {
-                           b += "positions="+jobpositions[z].id+"&"
-                          }
-                          a+=b;
-                          a = a.replace("undefinedpositions", "positions");
-                          a = a.replace("undefined", "");
-                        }
-                        if (values.checked.length === 0 && values.position.length > 0) {
+                        let positionField;
+                        let workingTimeField;
+                        let workEnvironmentField;
+                      
+                        if (values.checked.length === 0) {
                           for (let z = 0; z < city.length; z++) {
-                           a += "cities="+city[z].id+"&"
+                            a += "cities=" +city[z].id + "&";
                           }
-                          for (let z = 0; z < values.position.length; z++) {
-                            b += "positions=" + values.position[z] + "&";
+                        }
+                        if (values.position.length === 0) {
+                          for (let z = 0; z < jobpositions.length; z++) {
+                            positionField += "positions=" +jobpositions[z].id + "&";
                           }
-                          a+=b;
-                          a = a.replace("undefinedpositions", "positions");
-                          a = a.replace("undefined", "");
                         }
-                        if (values.checked.length === 0 && values.position.length === 0) {
-                         return
+                        if (values.workingTime.length === 0) {
+                          for (let z = 0; z < typeOfWork.length; z++) {
+                            workingTimeField += "typeWork=" +typeOfWork[z].key + "&";
+                          }
                         }
+                        if (values.workEnvironment.length === 0) {
+                          for (let z = 0; z < workplace.length; z++) {
+                            workEnvironmentField += "workPlace=" +workplace[z].key + "&";
+                          }
+                        }
+                       
+                        for (let z = 0; z < values.checked.length; z++) {
+                          a += "cities=" + values.checked[z] + "&";
+                        }
+                        for (let z = 0; z < values.position.length; z++) {
+                          positionField += "positions=" + values.position[z] + "&";
+                        }
+                        for (let z = 0; z < values.workingTime.length; z++) {
+                          workingTimeField += "typeWork=" + values.workingTime[z] + "&";
+                        }
+                        for (let z = 0; z < values.workEnvironment.length; z++) {
+                          workEnvironmentField += "workPlace=" + values.workEnvironment[z] + "&";
+                        }
+                        a = a+positionField+workingTimeField+workEnvironmentField 
+                        a = a.replace("undefinedpositions", "positions");
+                        a = a.replace("undefinedtypeWork", "typeWork");
+                        a = a.replace("undefinedworkPlace", "workPlace");
+                        a = a.replace("undefined", "");
+
+                        // if (
+                        //   values.checked.length > 0 &&
+                        //   values.position.length > 0 && values.workEnvironment.length >0 && values.workingTime.length>0
+                        // ) {
+                        //   for (let z = 0; z < values.checked.length; z++) {
+                        //     a += "cities=" + values.checked[z] + "&";
+                        //   }
+                        //   for (let z = 0; z < values.position.length; z++) {
+                        //     b += "positions=" + values.position[z] + "&";
+                        //   }
+                        //   for (let z = 0; z < values.workingTime.length; z++) {
+                        //     b += "typeWork=" + values.workingTime[z] + "&";
+                        //   }
+                        //   for (let z = 0; z < values.workEnvironment.length; z++) {
+                        //     b += "workPlace=" + values.workEnvironment[z] + "&";
+                        //   }
+                        //   a += b;
+                        //   a = a.replace("undefined", "");
+                        //   a = a.replace("undefinedpositions", "positions");
+                        // }
+                        // if (
+                        //   values.checked.length > 0 &&
+                        //   values.position.length === 0 &&
+                        //   values.workingTime.length === 0 &&
+                        //   values.workEnvironment.length === 0
+                        // ) {
+                        //   for (let z = 0; z < values.checked.length; z++) {
+                        //     a += "cities=" + values.checked[z] + "&";
+                        //   }
+                        //   for (let z = 0; z < jobpositions.length; z++) {
+                        //     b += "positions=" + jobpositions[z].id + "&";
+                        //   }
+                        //   for (let z = 0;z < typeOfWork.length; z++) {
+                        //     b += "typeWork=" + typeOfWork[z].key + "&";
+                        //   }
+                        //   for (let z = 0;z < workplace.length; z++) {
+                        //     b += "workPlace=" + workplace[z].key + "&";
+                        //   }
+                        //   a += b;
+                        //   a = a.replace("undefinedpositions", "positions");
+                        //   a = a.replace("undefined", "");
+                        // }
+                        // if (
+                        //   values.checked.length === 0 &&
+                        //   values.position.length > 0 && values.workingTime.length === 0 &&
+                        //   values.workEnvironment.length === 0
+                        // ) {
+                        //   for (let z = 0; z < city.length; z++) {
+                        //     a += "cities=" + city[z].id + "&";
+                        //   }
+                        //   for (let z = 0; z < values.position.length; z++) {
+                        //     b += "positions=" + values.position[z] + "&";
+                        //   }
+                        //   for (let z = 0;z < typeOfWork.length; z++) {
+                        //     b += "typeWork=" + typeOfWork[z].key + "&";
+                        //   }
+                        //   for (let z = 0;z < workplace.length; z++) {
+                        //     b += "workPlace=" + workplace[z].key + "&";
+                        //   }
+                        //   a += b;
+                        //   a = a.replace("undefinedpositions", "positions");
+                        //   a = a.replace("undefined", "");
+                        // }
+
+                        // if (
+                        //   values.checked.length === 0 &&
+                        //   values.position.length === 0 && values.workingTime.length > 0 &&
+                        //   values.workEnvironment.length === 0
+                        // ) {
+                        //   for (let z = 0; z < city.length; z++) {
+                        //     a += "cities=" + city[z].id + "&";
+                        //   }
+                        //   for (let z = 0; z < jobpositions.length; z++) {
+                        //     b += "positions=" + jobpositions[z].id + "&";
+                        //   }
+                        //   for (let z = 0;z < values.workingTime.length; z++) {
+                        //     b += "typeWork=" + values.workingTime[z] + "&";
+                        //   }
+                        //   for (let z = 0;z < workplace.length; z++) {
+                        //     b += "workPlace=" + workplace[z].key + "&";
+                        //   }
+                        //   a += b;
+                        //   a = a.replace("undefinedpositions", "positions");
+                        //   a = a.replace("undefined", "");
+                        // }
+
+                        // if (
+                        //   values.checked.length === 0 &&
+                        //   values.position.length === 0 && values.workingTime.length === 0 &&
+                        //   values.workEnvironment.length > 0
+                        // ) {
+                        //   for (let z = 0; z < city.length; z++) {
+                        //     a += "cities=" + city[z].id + "&";
+                        //   }
+                        //   for (let z = 0; z < jobpositions.length; z++) {
+                        //     b += "positions=" + jobpositions[z].id + "&";
+                        //   }
+                        //   for (let z = 0;z < typeOfWork.length; z++) {
+                        //     b += "typeWork=" + typeOfWork[z].key + "&";
+                        //   }
+                        //   for (let z = 0;z < values.workEnvironment.length; z++) {
+                        //     b += "workPlace=" + values.workEnvironment[z] + "&";
+                        //   }
+                        //   a += b;
+                        //   a = a.replace("undefinedpositions", "positions");
+                        //   a = a.replace("undefined", "");
+                        // }
+
+                        if (
+                          values.checked.length === 0 &&
+                          values.position.length === 0 && values.workEnvironment.length === 0 && values.workingTime.length===0
+                        ) {
+                          return;
+                        }
+
                         a = a.substring(0, a.length - 1);
-                        
                         console.log(a);
                         jobPostingsService
-                          .filterCityAndPosition(a)
+                          .filterCityPositionTypeWorkWorkPlace(a)
                           .then((result) => setjobPostings(result.data.data));
                       }}
                     >
                       {({ values }) => (
-                       
                         <Form>
-                           {console.log(values)}
+                          {console.log(values)}
                           <Card style={{ backgroundColor: "#F9F9F9" }}>
                             <Card.Content>
                               <Card.Header style={{ textAlign: "left" }}>
@@ -275,18 +391,18 @@ export default function JobPostings() {
                                   aria-labelledby="checkbox-group"
                                 >
                                   {city.map((result) => (
-                                    <div style={{ paddingBottom: "0.5em" }}>
+                                    <label style={{ paddingBottom: "0.5em" }}>
                                       <Field
                                         key={result.id}
                                         type="checkbox"
                                         name="checked"
-                                        value={result.id}
+                                        value={`${result.id}`}
                                       />
 
                                       {result.city}
 
                                       <br />
-                                    </div>
+                                    </label>
                                   ))}
                                 </div>
                               </Card.Content>
@@ -312,22 +428,105 @@ export default function JobPostings() {
                                 </div>
                                 <br />
                                 {jobpositions.map((result) => (
-                                  <div role="group" aria-labelledby="checkbox-group" style={{ paddingBottom: "1em" }}>
+                                  <div
+                                    role="group"
+                                    aria-labelledby="checkbox-group"
+                                    style={{ paddingBottom: "1em" }}
+                                  >
                                     <Field
-                                        key={result.id}
-                                        type="checkbox"
-                                        name="position"
-                                        value={result.id}
-                                      />
-                                       {result.positionName}
+                                      key={result.id}
+                                      type="checkbox"
+                                      name="position"
+                                      value={`${result.id}`}
+                                    />
+                                    {result.positionName}
                                   </div>
                                 ))}
                               </div>
                             </Card.Content>
                           </Card>
 
-                          <Button fluid type="submit" color='green'>Filtrele</Button>
-                          
+                          <Card style={{ backgroundColor: "#F9F9F9" }}>
+                            <Card.Content>
+                              <Card.Header style={{ textAlign: "left" }}>
+                                Çalışma Zamanı
+                              </Card.Header>
+                            </Card.Content>
+                            <Card.Content
+                              style={{ overflowY: "scroll", height: "auto" }}
+                            >
+                              <div style={{ textAlign: "left" }}>
+                                <div
+                                  role="group"
+                                  aria-labelledby="checkbox-group"
+                                  style={{ paddingBottom: "1em" }}
+                                >
+                                  <Field
+                                    type="checkbox"
+                                    name="workingTime"
+                                    value={`3`}
+                                  />
+                                  Yarı Zamanlı
+                                </div>
+
+                                <div
+                                  role="group"
+                                  aria-labelledby="checkbox-group"
+                                  style={{ paddingBottom: "1em" }}
+                                >
+                                  <Field
+                                    type="checkbox"
+                                    name="workingTime"
+                                    value={`2`}
+                                  />
+                                  Tam Zamanlı
+                                </div>
+                              </div>
+                            </Card.Content>
+                          </Card>
+
+                          <Card style={{ backgroundColor: "#F9F9F9" }}>
+                            <Card.Content>
+                              <Card.Header style={{ textAlign: "left" }}>
+                                Çalışma Yeri
+                              </Card.Header>
+                            </Card.Content>
+                            <Card.Content
+                              style={{ overflowY: "scroll", height: "auto" }}
+                            >
+                              <div style={{ textAlign: "left" }}>
+                                <div
+                                  role="group"
+                                  aria-labelledby="checkbox-group"
+                                  style={{ paddingBottom: "1em" }}
+                                >
+                                  <Field
+                                    type="checkbox"
+                                    name="workEnvironment"
+                                    value="0"
+                                  />
+                                  İş Yerinde
+                                </div>
+
+                                <div
+                                  role="group"
+                                  aria-labelledby="checkbox-group"
+                                  style={{ paddingBottom: "1em" }}
+                                >
+                                  <Field
+                                    type="checkbox"
+                                    name="workEnvironment"
+                                    value={`1`}
+                                  />
+                                  Uzaktan
+                                </div>
+                              </div>
+                            </Card.Content>
+                          </Card>
+
+                          <Button fluid type="submit" color="green">
+                            Filtrele
+                          </Button>
                         </Form>
                       )}
                     </Formik>
@@ -437,6 +636,7 @@ export default function JobPostings() {
               onPageChange={(event, data) => (
                 data.activePage, pageSize, setPageNo(data.activePage)
               )}
+             
             />
           </Grid.Column>
           <Grid.Column width={1}></Grid.Column>
