@@ -50,6 +50,8 @@ import SocialMediaUptade from "../pages/cvAdd/SocialMediaUptade";
 import TechnologyUptade from "../pages/cvAdd/TechnologyUptade";
 import EmployersUptadeConfirmation from "../pages/EmployersUptadeConfirmation";
 import EmployersUptade from "../pages/EmployersUptade";
+import Profile from "../pages/Profile";
+import CvAddUptadeDelete from "../pages/cvAdd/CvAddUptadeDelete";
 
 
 export default function Dashboard() {
@@ -85,6 +87,8 @@ export default function Dashboard() {
      <Route exact path="/technologyuptade" component={TechnologyUptade}/>
      <Route exact path="/employersuptadeconfirmation" component={EmployersUptadeConfirmation}/>
      <Route exact path="/employersuptade" component={EmployersUptade}/>
+     <Route exact path="/profile" component={Profile}/>
+     <Route exact path="/cvadduptadedelete" component={CvAddUptadeDelete}/>
      
      <Route exact path="/favoritedetail/:id" component={FavoriteDetail}/>
     

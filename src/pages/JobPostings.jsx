@@ -243,118 +243,8 @@ export default function JobPostings() {
                         a = a.replace("undefinedworkPlace", "workPlace");
                         a = a.replace("undefined", "");
 
-                        // if (
-                        //   values.checked.length > 0 &&
-                        //   values.position.length > 0 && values.workEnvironment.length >0 && values.workingTime.length>0
-                        // ) {
-                        //   for (let z = 0; z < values.checked.length; z++) {
-                        //     a += "cities=" + values.checked[z] + "&";
-                        //   }
-                        //   for (let z = 0; z < values.position.length; z++) {
-                        //     b += "positions=" + values.position[z] + "&";
-                        //   }
-                        //   for (let z = 0; z < values.workingTime.length; z++) {
-                        //     b += "typeWork=" + values.workingTime[z] + "&";
-                        //   }
-                        //   for (let z = 0; z < values.workEnvironment.length; z++) {
-                        //     b += "workPlace=" + values.workEnvironment[z] + "&";
-                        //   }
-                        //   a += b;
-                        //   a = a.replace("undefined", "");
-                        //   a = a.replace("undefinedpositions", "positions");
-                        // }
-                        // if (
-                        //   values.checked.length > 0 &&
-                        //   values.position.length === 0 &&
-                        //   values.workingTime.length === 0 &&
-                        //   values.workEnvironment.length === 0
-                        // ) {
-                        //   for (let z = 0; z < values.checked.length; z++) {
-                        //     a += "cities=" + values.checked[z] + "&";
-                        //   }
-                        //   for (let z = 0; z < jobpositions.length; z++) {
-                        //     b += "positions=" + jobpositions[z].id + "&";
-                        //   }
-                        //   for (let z = 0;z < typeOfWork.length; z++) {
-                        //     b += "typeWork=" + typeOfWork[z].key + "&";
-                        //   }
-                        //   for (let z = 0;z < workplace.length; z++) {
-                        //     b += "workPlace=" + workplace[z].key + "&";
-                        //   }
-                        //   a += b;
-                        //   a = a.replace("undefinedpositions", "positions");
-                        //   a = a.replace("undefined", "");
-                        // }
-                        // if (
-                        //   values.checked.length === 0 &&
-                        //   values.position.length > 0 && values.workingTime.length === 0 &&
-                        //   values.workEnvironment.length === 0
-                        // ) {
-                        //   for (let z = 0; z < city.length; z++) {
-                        //     a += "cities=" + city[z].id + "&";
-                        //   }
-                        //   for (let z = 0; z < values.position.length; z++) {
-                        //     b += "positions=" + values.position[z] + "&";
-                        //   }
-                        //   for (let z = 0;z < typeOfWork.length; z++) {
-                        //     b += "typeWork=" + typeOfWork[z].key + "&";
-                        //   }
-                        //   for (let z = 0;z < workplace.length; z++) {
-                        //     b += "workPlace=" + workplace[z].key + "&";
-                        //   }
-                        //   a += b;
-                        //   a = a.replace("undefinedpositions", "positions");
-                        //   a = a.replace("undefined", "");
-                        // }
 
-                        // if (
-                        //   values.checked.length === 0 &&
-                        //   values.position.length === 0 && values.workingTime.length > 0 &&
-                        //   values.workEnvironment.length === 0
-                        // ) {
-                        //   for (let z = 0; z < city.length; z++) {
-                        //     a += "cities=" + city[z].id + "&";
-                        //   }
-                        //   for (let z = 0; z < jobpositions.length; z++) {
-                        //     b += "positions=" + jobpositions[z].id + "&";
-                        //   }
-                        //   for (let z = 0;z < values.workingTime.length; z++) {
-                        //     b += "typeWork=" + values.workingTime[z] + "&";
-                        //   }
-                        //   for (let z = 0;z < workplace.length; z++) {
-                        //     b += "workPlace=" + workplace[z].key + "&";
-                        //   }
-                        //   a += b;
-                        //   a = a.replace("undefinedpositions", "positions");
-                        //   a = a.replace("undefined", "");
-                        // }
-
-                        // if (
-                        //   values.checked.length === 0 &&
-                        //   values.position.length === 0 && values.workingTime.length === 0 &&
-                        //   values.workEnvironment.length > 0
-                        // ) {
-                        //   for (let z = 0; z < city.length; z++) {
-                        //     a += "cities=" + city[z].id + "&";
-                        //   }
-                        //   for (let z = 0; z < jobpositions.length; z++) {
-                        //     b += "positions=" + jobpositions[z].id + "&";
-                        //   }
-                        //   for (let z = 0;z < typeOfWork.length; z++) {
-                        //     b += "typeWork=" + typeOfWork[z].key + "&";
-                        //   }
-                        //   for (let z = 0;z < values.workEnvironment.length; z++) {
-                        //     b += "workPlace=" + values.workEnvironment[z] + "&";
-                        //   }
-                        //   a += b;
-                        //   a = a.replace("undefinedpositions", "positions");
-                        //   a = a.replace("undefined", "");
-                        // }
-
-                        if (
-                          values.checked.length === 0 &&
-                          values.position.length === 0 && values.workEnvironment.length === 0 && values.workingTime.length===0
-                        ) {
+                        if (values.checked.length === 0 && values.position.length === 0 && values.workEnvironment.length === 0 && values.workingTime.length===0 ) {
                           return;
                         }
 
@@ -503,7 +393,7 @@ export default function JobPostings() {
                                   <Field
                                     type="checkbox"
                                     name="workEnvironment"
-                                    value="0"
+                                    value={`0`}
                                   />
                                   İş Yerinde
                                 </div>
@@ -580,9 +470,9 @@ export default function JobPostings() {
                           <br />
                           <label style={{ float: "left" }}>
                             <strong>Çalışma Yeri:</strong>{" "}
-                            {result.workplace == 0
+                            {result.workplace === 0
                               ? "İş Yerinde"
-                              : result.workplace || result.workplace == 1
+                              : result.workplace || result.workplace === 1
                               ? "Uzaktan"
                               : result.workplace || result.workplace == null
                               ? alert("Bulunamadı")
@@ -591,9 +481,9 @@ export default function JobPostings() {
                           <br />
                           <label style={{ float: "left" }}>
                             <strong>Çalışma Zamanı:</strong>{" "}
-                            {result.typeOfWork == 2
+                            {result.typeOfWork === 2
                               ? "Tam Zamanlı "
-                              : result.typeOfWork || result.typeOfWork == 3
+                              : result.typeOfWork || result.typeOfWork === 3
                               ? "Yarı Zamanlı"
                               : result.typeOfWork || result.typeOfWork == null
                               ? alert("Bulunamadı")

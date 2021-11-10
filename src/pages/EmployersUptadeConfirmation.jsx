@@ -18,7 +18,7 @@ export default function EmployersUptadeConfirmation() {
     employerService
       .getByUptadeConfirmationWait()
       .then((result) => setEmployerUptadeConfirmationWait(result.data.data));
-  }, []);
+  });
 
   useEffect(() => {
     let employerService = new EmployerService();
@@ -27,9 +27,7 @@ export default function EmployersUptadeConfirmation() {
       .then((result) => setOldInformation(result.data.data));
   }, []);
 
-  function setOldInformationFunction(id) {
-    
-  }
+
 
   function setUptadeConfirmation(id) {
     let employerService = new EmployerService();

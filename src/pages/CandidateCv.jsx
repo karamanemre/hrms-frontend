@@ -207,15 +207,15 @@ export default function CandidateCv() {
                   <div>
                     <div style={{ float: "left" }}>
                       {" "}
-                      {result.programminglanguage}{" "}
+                      - {result.programminglanguage}{" "}
                     </div>
                     <br />
                   </div>
                 ))}
-                <br />
+                
                 {technology.map((result) => (
                   <div>
-                    <div style={{ float: "left" }}> {result.technology}</div>
+                     <div style={{ float: "left" }}> - {result.technology}</div>
                     <br />
                   </div>
                 ))}
@@ -238,7 +238,7 @@ export default function CandidateCv() {
                 <br />
                 {language.map((result) => (
                   <div>
-                    <div style={{ float: "left" }}> {result.language} </div>
+                    <div style={{ float: "left" }}> - {result.language} </div>
                     <br />
                   </div>
                 ))}

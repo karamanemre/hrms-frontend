@@ -20,9 +20,9 @@ import CityService from "../services/cityService";
 import  HrmsTextInput from "../utilities/customFormControls/HrmsTextInput";
 import { useHistory } from "react-router";
 
-const options = [{ text: "Tam Zamanlı",id:2 }, { text: "Yarı Zamanlı",id:3 }];
+const options = [{ text: "Tam Zamanlı",id:0 }, { text: "Yarı Zamanlı",id:1 }];
 
-const options2 = [{ text: "İş yerinde",id:0 }, { text: "Uzaktan",id:1 }];
+const options2 = [{ text: "İş yerinde",id:2 }, { text: "Uzaktan",id:3 }];
 
 export default function JobPostingsAdd() {
   const [city, setcity] = useState([]);

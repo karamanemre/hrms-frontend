@@ -22,7 +22,7 @@ export default function CoverLatterAdd() {
   const history = useHistory();
 
   const [coverLetterDefault, setcoverLetterDefault] = useState([]);
-  console.log(coverLetterDefault);
+  
 
   useEffect(() => {
     let coverLetterService = new CoverLetterService();

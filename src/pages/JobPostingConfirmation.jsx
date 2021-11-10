@@ -24,26 +24,23 @@ import { render } from "@testing-library/react";
 export default function JobPostingConfirmation() {
 
   const [jobPostingsIsConfirmationFalse, setJobPostingsIsConfirmationFalse] = useState([]);
- 
+
 
   useEffect(() => {
     let jobPostingsService = new JobPostingsService();
     jobPostingsService.getByIsConfirmationFalse().then((result) => setJobPostingsIsConfirmationFalse(result.data.data));
-  }, []);
-
-  let a = jobPostingsIsConfirmationFalse.length
+  });
 
   function setIsConfirmation(id){
     let jobPostingsService = new JobPostingsService();
     jobPostingsService.uptadeIsConfirmation(id);
     toast.success("İş İlanı Onaylandı");
+    
    
   };
-
-
   
   const {jobPosting} = useSelector(state => state.jobPosting);
-  
+ 
   
   
 

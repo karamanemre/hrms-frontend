@@ -72,6 +72,7 @@ const source = _.times(jobPostings.length, () => ({
   
   title: "s",
   description: "ttt",
+ 
   
  
 }));
@@ -160,18 +161,8 @@ function exampleReducer(state, action) {
                     results={results}
                     value={value}
                   />
+               
               
-                <Segment>
-                  <Header>State</Header>
-                  <pre style={{ overflowX: "auto" }}>
-                    {JSON.stringify({ loading, results, value }, null, 2)}
-                  </pre>
-                  <Header>Options</Header>
-                  <pre style={{ overflowX: "auto" }}>
-                    {JSON.stringify(source, null, 2)}
-                  </pre>
-                </Segment>
-                
               </Header>
             </Grid.Column>
             <Grid.Column width={8}>
